@@ -2,6 +2,7 @@
 // http://karma-runner.github.io/0.10/config/configuration-file.html
 
 module.exports = function(config) {
+  'use strict';
   config.set({
     // base path, that will be used to resolve files and exclude
     basePath: '',
@@ -32,7 +33,7 @@ module.exports = function(config) {
 
 
     // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: false,
+    autoWatch: true,
 
 
     // Start these browsers, currently available:
@@ -48,6 +49,19 @@ module.exports = function(config) {
 
     // Continuous Integration mode
     // if true, it capture browsers, run tests and exit
-    singleRun: false
+    singleRun: false,
+
+    // For code coverage reporting
+    preprocessors: {
+      'app/scripts/**/*.js': 'coverage'
+    },
+    reporters: [
+      'progress',
+      'coverage'
+    ],
+    coverageReporter: {
+      type: 'text-summary'
+    }
+
   });
 };
