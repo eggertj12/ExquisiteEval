@@ -11,8 +11,8 @@ describe('Service: EvalState', function () {
     EvalState = _EvalState_;
   }));
 
-  it('should initially be null', function () {
-    expect(EvalState.token).toBe(null);
+  it('should contain token', function () {
+    expect(EvalState.Token).toBeDefined();
   });
 
 });

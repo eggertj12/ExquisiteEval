@@ -2,5 +2,5 @@
 
 angular.module('exquisiteEvalApp')
   .value('EvalState', {
-    token: null
+    Token: null
   });

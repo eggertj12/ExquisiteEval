@@ -1,0 +1,10 @@
+<aside class="Login">
+    <p class="Login-error" ng-bind="message"></p>
+    <form ng-submit="login()">
+        <label for="username">Username:</label>
+        <input class="form-control" id="username" type="text" ng-model="user.user">
+        <label for="password">Password:</label>
+        <input class="form-control" id="password" type="password" ng-model="user.pass">
+        <button class="btn btn-primary">Login</button>
+    </form>
+</aside>

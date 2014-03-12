@@ -35,6 +35,17 @@ module.exports = function(config) {
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: true,
 
+    // For code coverage reporting
+    preprocessors: {
+      'app/scripts/**/*.js': 'coverage'
+    },
+    reporters: [
+      'progress',
+      'coverage'
+    ],
+    // coverageReporter: {
+    //   type: 'text-summary'
+    // },
 
     // Start these browsers, currently available:
     // - Chrome
@@ -49,19 +60,7 @@ module.exports = function(config) {
 
     // Continuous Integration mode
     // if true, it capture browsers, run tests and exit
-    singleRun: false,
-
-    // For code coverage reporting
-    preprocessors: {
-      'app/scripts/**/*.js': 'coverage'
-    },
-    reporters: [
-      'progress',
-      'coverage'
-    ],
-    coverageReporter: {
-      type: 'text-summary'
-    }
+    singleRun: false
 
   });
 };

@@ -9,7 +9,29 @@ angular.module('exquisiteEvalApp', [
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
+      .when('/login', {
+        templateUrl: 'views/login.html',
+        controller: 'LoginCtrl'
+      })
+      .when('/admin', {
+        templateUrl: 'views/admin.html',
+        controller: 'AdminCtrl'
+      })
+      .when('/user', {
+        templateUrl: 'views/user.html',
+        controller: 'UserCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
-  });
+  })
+  .run(['$rootScope', '$location', 'EvalState',
+    function ($rootScope, $location, EvalState) {
+    $rootScope.$on('$routeChangeStart', function () {
+
+      if (EvalState.Token === null) {
+        $location.path('/login');
+      }
+
+    });
+  }]);

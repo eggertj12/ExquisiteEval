@@ -9,7 +9,14 @@ describe('Service: Evalbackend,', function () {
   // ------------------------------------------------------------------------
 
   // load the service's module
-  beforeEach(module('exquisiteEvalApp'));
+  beforeEach(function() {
+    var EvalSettings = {backendURL: 'api/v1/'};
+
+    module('exquisiteEvalApp');
+    module(function ($provide) {
+      $provide.constant('EvalSettings', EvalSettings);
+    });
+  });
 
   // instantiate service
   beforeEach(inject(function (_Evalbackend_, $injector) {
