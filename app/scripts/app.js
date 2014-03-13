@@ -21,6 +21,10 @@ angular.module('exquisiteEvalApp', [
         templateUrl: 'views/user.html',
         controller: 'UserCtrl'
       })
+      .when('/template', {
+        templateUrl: 'views/template.html',
+        controller: 'TemplateCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

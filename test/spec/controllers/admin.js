@@ -6,17 +6,23 @@ describe('Controller: AdminCtrl', function () {
   beforeEach(module('exquisiteEvalApp'));
 
   var AdminCtrl,
+    $location,
     scope;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope) {
+  beforeEach(inject(function ($controller, $rootScope, $injector) {
     scope = $rootScope.$new();
+    $location = $injector.get('$location');
     AdminCtrl = $controller('AdminCtrl', {
       $scope: scope
     });
   }));
 
-  it('should attach a list of awesomeThings to the scope', function () {
-    expect(scope.awesomeThings.length).toBe(3);
+  it('should move you to templates view', function() {
+    // Just to fulfill 100% code coverage, should be in an e2e test
+
+    scope.gotoTemplates();
+    expect($location.url()).toBe('/template');
   });
+
 });
