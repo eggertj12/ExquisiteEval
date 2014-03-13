@@ -39,7 +39,123 @@ angular.module('exquisiteEvalApp')
           return false;
         }
         
-        $http.get(EvalSettings.backendURL + 'evaluationtemplate/' + id).
+        $http.get(EvalSettings.backendURL + 'evaluationtemplates/' + id).
+        success(function(data) {
+          deferred.resolve(data);
+        }).
+        error(function(data) {
+          deferred.reject(data);
+        });
+
+        return deferred.promise;
+      },
+
+      getEvaluations: function() {
+        var deferred = $q.defer();
+
+        $http.get(EvalSettings.backendURL + 'evaluations').
+        success(function(data) {
+          deferred.resolve(data);
+        }).
+        error(function(data) {
+          deferred.reject(data);
+        });
+
+        return deferred.promise;
+      },
+
+      addEvaluation: function(evaluation) {
+        var deferred = $q.defer();
+
+        $http.post(EvalSettings.backendURL + 'evaluations', evaluation).
+        success(function(data) {
+          deferred.resolve(data);
+        }).
+        error(function(data) {
+          deferred.reject(data);
+        });
+
+        return deferred.promise;
+      },
+
+      getEvaluation: function(id) {
+        var deferred = $q.defer();
+
+        if (!angular.isNumber(id)) {
+          return false;
+        }
+        
+        $http.get(EvalSettings.backendURL + 'evaluations/' + id).
+        success(function(data) {
+          deferred.resolve(data);
+        }).
+        error(function(data) {
+          deferred.reject(data);
+        });
+
+        return deferred.promise;
+      },
+
+      getMyEvaluations: function() {
+        var deferred = $q.defer();
+
+        $http.get(EvalSettings.backendURL + 'my/evaluations').
+        success(function(data) {
+          deferred.resolve(data);
+        }).
+        error(function(data) {
+          deferred.reject(data);
+        });
+
+        return deferred.promise;
+      },
+
+      getMyCourses: function() {
+        var deferred = $q.defer();
+
+        $http.get(EvalSettings.backendURL + 'my/courses').
+        success(function(data) {
+          deferred.resolve(data);
+        }).
+        error(function(data) {
+          deferred.reject(data);
+        });
+
+        return deferred.promise;
+      },
+
+      getCourseTeachers: function(course, teacher) {
+        var deferred = $q.defer();
+
+        $http.get(EvalSettings.backendURL + 'courses/' + course + '/' + teacher + '/teachers').
+        success(function(data) {
+          deferred.resolve(data);
+        }).
+        error(function(data) {
+          deferred.reject(data);
+        });
+
+        return deferred.promise;
+      },
+
+      getCourseEvaluation: function(course, teacher, id) {
+        var deferred = $q.defer();
+
+        $http.get(EvalSettings.backendURL + 'courses/' + course + '/' + teacher + '/evaluations/' + id ).
+        success(function(data) {
+          deferred.resolve(data);
+        }).
+        error(function(data) {
+          deferred.reject(data);
+        });
+
+        return deferred.promise;
+      },
+
+      addCourseEvaluation: function(course, teacher, id, evaluation) {
+        var deferred = $q.defer();
+
+        $http.post(EvalSettings.backendURL + 'courses/' + course + '/' + teacher + '/evaluations/' + id, evaluation).
         success(function(data) {
           deferred.resolve(data);
         }).
@@ -49,5 +165,6 @@ angular.module('exquisiteEvalApp')
 
         return deferred.promise;
       }
+
     };
   }]);
