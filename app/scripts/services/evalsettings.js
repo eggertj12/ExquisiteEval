@@ -2,5 +2,5 @@
 
 angular.module('exquisiteEvalApp')
   .constant('EvalSettings', {
-    backendURL: 'http://project3api.haukurhaf.net/api/v1/'
+    backendURL: 'http://dispatch.ru.is/h08/api/v1/'
   });

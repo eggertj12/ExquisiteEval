@@ -8,6 +8,8 @@ angular.module('exquisiteEvalApp')
       pass: ''
     };
 
+    $scope.Token = EvalState.Token;
+
     $scope.login = function() {
       $http.post(EvalSettings.backendURL + 'login', $scope.user).
       success(function(data) {
@@ -21,6 +23,11 @@ angular.module('exquisiteEvalApp')
       error(function() {
         $scope.message = 'Invalid login';
       });
+    };
+
+    $scope.logout = function() {
+      EvalState.Token = null;
+      $scope.Token = null;
     };
 
   }]);
