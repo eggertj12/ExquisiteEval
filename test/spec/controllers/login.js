@@ -75,6 +75,17 @@ describe('Controller: LoginCtrl', function () {
     expect(EvalState.Token).toEqual('YWRtaW46c211dXV1');
   });
 
+  it('should handle logout', function () {
+    // Arrange
+    EvalState.Token = 'NotNull';
+
+    // Act
+    scope.logout();
+
+    // Assert
+    expect(EvalState.Token).toBe(null);
+  });
+
   it('should handle user login', function () {
     // Arrange
     $httpBackend.expectPOST('api/v1/login');

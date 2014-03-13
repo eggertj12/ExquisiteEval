@@ -43,9 +43,9 @@ module.exports = function(config) {
       'progress',
       'coverage'
     ],
-    // coverageReporter: {
-    //   type: 'text-summary'
-    // },
+    coverageReporter: {
+      type: 'text-summary'
+    },
 
     // Start these browsers, currently available:
     // - Chrome

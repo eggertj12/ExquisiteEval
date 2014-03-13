@@ -1,10 +1,26 @@
-<aside class="Login">
-    <p class="Login-error" ng-bind="message"></p>
-    <form ng-submit="login()">
-        <label for="username">Username:</label>
-        <input class="form-control" id="username" type="text" ng-model="user.user">
-        <label for="password">Password:</label>
-        <input class="form-control" id="password" type="password" ng-model="user.pass">
-        <button class="btn btn-primary">Login</button>
+<aside ng-show="Token === null" class="Login">
+    <header>
+        <h1 class="Login-header">Login needed</h1>
+    </header>
+    <p class="Login-error alert alert-danger" ng-show="message" ng-bind="message"></p>
+    <form ng-submit="login()" class="Login-form clearfix">
+        <div class="form-group">
+            <label class="sr-only" for="username">Username:</label>
+            <input class="form-control" id="username" type="text" ng-model="user.user" placeholder="Username" required autofocus>
+        </div>
+        <div class="form-group">
+            <label class="sr-only" for="password">Password:</label>
+            <input class="form-control" id="password" type="password" ng-model="user.pass" placeholder="password" required>
+        </div>
+        <button class="Login-form-button btn btn-primary pull-right">Login</button>
+    </form>
+</aside>
+
+<aside ng-show="Token !== null" class="Login">
+    <header>
+        <h1 class="Login-header">Leaving?</h1>
+    </header>
+    <form ng-submit="logout()" class="Login-form clearfix">
+        <button class="Login-form-button btn btn-primary pull-right">Logout</button>
     </form>
 </aside>
