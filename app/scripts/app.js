@@ -24,6 +24,9 @@ angular.module('exquisiteEvalApp', [
       .otherwise({
         redirectTo: '/'
       });
+  }).
+  config(function ($httpProvider) {
+    $httpProvider.interceptors.push('AuthInterceptor');
   })
   .run(['$rootScope', '$location', 'EvalState',
     function ($rootScope, $location, EvalState) {
