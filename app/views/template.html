@@ -1,1 +1,21 @@
-<p>This is the template view.</p>
+<h1>Edit thine template</h1>
+<button class="placeholder" ng-click="tgetTemplate()">Get thine template!</button>
+<div class="template-maker">
+    <div class="titles">
+        <input placeholder="{{template.TitleIS}}" data-ng-model="template.TitleIS"/>
+        <input placeholder="{{template.TitleEN}}" data-ng-model="template.TitleEN"
+    </div>
+    <div class="questions">
+        <p ng-repeat="question in template.CourseQuestions track by $index">
+            {{question.text}}
+        </p>
+        <a class="add-question" ng-click="addingQuestion()">Add question</a>
+        <div ng-if="vm.displayQ">
+            <p>Here we will add some stuff on the details to add to a question</p>
+            <input placeholder="Question text" class="" data-ng-model="question.text"/>
+            <button ng-click="addQuestion()">Add the question</button>
+        </div>
+
+    </div>
+</div>
+<button class="" ng-click="postTemplate()">Post thine template!</button>
