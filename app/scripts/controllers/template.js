@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('exquisiteEvalApp')
-  .controller('TemplateCtrl', ['Evalbackend', function ($scope, Evalbackend) {
+  .controller('TemplateCtrl', ['$scope', 'Evalbackend', function ($scope, Evalbackend) {
 
 
     $scope.template = {
@@ -26,16 +26,14 @@ angular.module('exquisiteEvalApp')
       };
 
     $scope.addQuestion = function() {
-        $scope.template.questions.push($scope.question);
+        $scope.template.CourseQuestions.push($scope.question);
         $scope.vm.displayQ = false;
       };
 
     $scope.tgetTemplate = function() {
         console.log('Hi!');
-        Evalbackend.getTemplate(1).success(function(data) {
-            console.log('Success!');
-            $scope.template = data;
-          });
+        var x = Evalbackend.getTemplate(1);
+        console.log(x);
       };
 
     $scope.postTemplate = function() {
