@@ -7,12 +7,14 @@ describe('Controller: AdminCtrl', function () {
 
   var AdminCtrl,
     $location,
+    EvalBackend,
     scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope, $injector) {
     scope = $rootScope.$new();
     $location = $injector.get('$location');
+    EvalBackend = $injector.get('EvalBackend');
     AdminCtrl = $controller('AdminCtrl', {
       $scope: scope
     });

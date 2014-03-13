@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('exquisiteEvalApp')
-  .service('Evalbackend', ['$http', '$q', 'EvalSettings',
-  function Evalbackend($http, $q, EvalSettings) {
+  .service('EvalBackend', ['$http', '$q', 'EvalSettings',
+  function EvalBackend($http, $q, EvalSettings) {
     return {
       getTemplates: function() {
         var deferred = $q.defer();

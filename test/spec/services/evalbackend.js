@@ -1,7 +1,7 @@
 'use strict';
 
-describe('Service: Evalbackend,', function () {
-  var Evalbackend,
+describe('Service: EvalBackend,', function () {
+  var EvalBackend,
     $httpBackend;
 
   // ------------------------------------------------------------------------
@@ -19,8 +19,8 @@ describe('Service: Evalbackend,', function () {
   });
 
   // instantiate service
-  beforeEach(inject(function (_Evalbackend_, $injector) {
-    Evalbackend = _Evalbackend_;
+  beforeEach(inject(function (_EvalBackend_, $injector) {
+    EvalBackend = _EvalBackend_;
     $httpBackend = $injector.get('$httpBackend');
   }));
 
@@ -50,7 +50,7 @@ describe('Service: Evalbackend,', function () {
         );
 
       // Act
-      promise = Evalbackend.getTemplates();
+      promise = EvalBackend.getTemplates();
       promise.then(function(data) {
         result = data;
       });
@@ -71,7 +71,7 @@ describe('Service: Evalbackend,', function () {
         );
 
       // Act
-      promise = Evalbackend.getTemplates();
+      promise = EvalBackend.getTemplates();
       promise.then(function(data) {
         result = data;
       }, function(reason) {
@@ -106,7 +106,7 @@ describe('Service: Evalbackend,', function () {
         );
 
       // Act
-      promise = Evalbackend.addTemplate();
+      promise = EvalBackend.addTemplate();
       promise.then(function(data) {
         result = data;
       });
@@ -127,7 +127,7 @@ describe('Service: Evalbackend,', function () {
         );
 
       // Act
-      promise = Evalbackend.addTemplate();
+      promise = EvalBackend.addTemplate();
       promise.then(function(data) {
         result = data;
       }, function(reason) {
@@ -154,7 +154,7 @@ describe('Service: Evalbackend,', function () {
       // Arrange
 
       // Act
-      result = Evalbackend.getTemplate();
+      result = EvalBackend.getTemplate();
 
       // Assert
       expect(result).toBe(false);
@@ -172,7 +172,7 @@ describe('Service: Evalbackend,', function () {
         );
 
       // Act
-      promise = Evalbackend.getTemplate(1);
+      promise = EvalBackend.getTemplate(1);
       promise.then(function(data) {
         result = data;
       });
@@ -194,7 +194,7 @@ describe('Service: Evalbackend,', function () {
         );
 
       // Act
-      promise = Evalbackend.getTemplate(1);
+      promise = EvalBackend.getTemplate(1);
       promise.then(function(data) {
         result = data;
       }, function(reason) {
@@ -233,7 +233,7 @@ describe('Service: Evalbackend,', function () {
         ]);
 
       // Act
-      promise = Evalbackend.getEvaluations();
+      promise = EvalBackend.getEvaluations();
       promise.then(function(data) {
         result = data;
       });
@@ -254,7 +254,7 @@ describe('Service: Evalbackend,', function () {
         );
 
       // Act
-      promise = Evalbackend.getEvaluations();
+      promise = EvalBackend.getEvaluations();
       promise.then(function(data) {
         result = data;
       }, function(reason) {
@@ -289,7 +289,7 @@ describe('Service: Evalbackend,', function () {
         );
 
       // Act
-      promise = Evalbackend.addEvaluation();
+      promise = EvalBackend.addEvaluation();
       promise.then(function(data) {
         result = data;
       });
@@ -310,7 +310,7 @@ describe('Service: Evalbackend,', function () {
         );
 
       // Act
-      promise = Evalbackend.addEvaluation();
+      promise = EvalBackend.addEvaluation();
       promise.then(function(data) {
         result = data;
       }, function(reason) {
@@ -337,7 +337,7 @@ describe('Service: Evalbackend,', function () {
       // Arrange
 
       // Act
-      result = Evalbackend.getEvaluation();
+      result = EvalBackend.getEvaluation();
 
       // Assert
       expect(result).toBe(false);
@@ -355,7 +355,7 @@ describe('Service: Evalbackend,', function () {
         );
 
       // Act
-      promise = Evalbackend.getEvaluation(1);
+      promise = EvalBackend.getEvaluation(1);
       promise.then(function(data) {
         result = data;
       });
@@ -377,7 +377,7 @@ describe('Service: Evalbackend,', function () {
         );
 
       // Act
-      promise = Evalbackend.getEvaluation(1);
+      promise = EvalBackend.getEvaluation(1);
       promise.then(function(data) {
         result = data;
       }, function(reason) {
@@ -417,7 +417,7 @@ describe('Service: Evalbackend,', function () {
         ]);
 
       // Act
-      promise = Evalbackend.getMyCourses();
+      promise = EvalBackend.getMyCourses();
       promise.then(function(data) {
         result = data;
       });
@@ -438,7 +438,7 @@ describe('Service: Evalbackend,', function () {
         );
 
       // Act
-      promise = Evalbackend.getMyCourses();
+      promise = EvalBackend.getMyCourses();
       promise.then(function(data) {
         result = data;
       }, function(reason) {
@@ -479,7 +479,7 @@ describe('Service: Evalbackend,', function () {
         ]);
 
       // Act
-      promise = Evalbackend.getMyEvaluations();
+      promise = EvalBackend.getMyEvaluations();
       promise.then(function(data) {
         result = data;
       });
@@ -500,7 +500,7 @@ describe('Service: Evalbackend,', function () {
         );
 
       // Act
-      promise = Evalbackend.getMyEvaluations();
+      promise = EvalBackend.getMyEvaluations();
       promise.then(function(data) {
         result = data;
       }, function(reason) {
@@ -539,7 +539,7 @@ describe('Service: Evalbackend,', function () {
         ]);
 
       // Act
-      promise = Evalbackend.getCourseTeachers('T-427-VEFF', '20141');
+      promise = EvalBackend.getCourseTeachers('T-427-VEFF', '20141');
       promise.then(function(data) {
         result = data;
       });
@@ -560,7 +560,7 @@ describe('Service: Evalbackend,', function () {
         );
 
       // Act
-      promise = Evalbackend.getCourseTeachers('T-427-VEFF', '20141');
+      promise = EvalBackend.getCourseTeachers('T-427-VEFF', '20141');
       promise.then(function(data) {
         result = data;
       }, function(reason) {
@@ -596,7 +596,7 @@ describe('Service: Evalbackend,', function () {
         ]);
 
       // Act
-      promise = Evalbackend.getCourseEvaluation('T-427-VEFF', '20141', 1);
+      promise = EvalBackend.getCourseEvaluation('T-427-VEFF', '20141', 1);
       promise.then(function(data) {
         result = data;
       });
@@ -617,7 +617,7 @@ describe('Service: Evalbackend,', function () {
         );
 
       // Act
-      promise = Evalbackend.getCourseEvaluation('T-427-VEFF', '20141', 1);
+      promise = EvalBackend.getCourseEvaluation('T-427-VEFF', '20141', 1);
       promise.then(function(data) {
         result = data;
       }, function(reason) {
@@ -652,7 +652,7 @@ describe('Service: Evalbackend,', function () {
         );
 
       // Act
-      promise = Evalbackend.addCourseEvaluation('T-427-VEFF', '20141', 1);
+      promise = EvalBackend.addCourseEvaluation('T-427-VEFF', '20141', 1);
       promise.then(function(data) {
         result = data;
       });
@@ -673,7 +673,7 @@ describe('Service: Evalbackend,', function () {
         );
 
       // Act
-      promise = Evalbackend.addCourseEvaluation('T-427-VEFF', '20141', 1);
+      promise = EvalBackend.addCourseEvaluation('T-427-VEFF', '20141', 1);
       promise.then(function(data) {
         result = data;
       }, function(reason) {

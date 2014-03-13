@@ -1,2 +1,9 @@
-<h1>This is the admin view.</h1>
+<h1>Exquisite eval admin panel.</h1>
+
 <p>Here you can go to <button class="" ng-click="gotoTemplates()">Templates!</button> or go to Evaluation <button class="" ng-click="results()">Results!</button>
+
+<ul>
+    <li ng-repeat="template in templates">
+        <span ng-bind="template.TitleIS"></span>
+    </li>
+</ul>
