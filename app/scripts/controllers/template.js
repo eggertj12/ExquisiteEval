@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('exquisiteEvalApp')
-  .controller('TemplateCtrl', ['$scope', 'Evalbackend', function ($scope, Evalbackend) {
+  .controller('TemplateCtrl', ['$scope', 'EvalBackend', function ($scope, EvalBackend) {
 
 
     $scope.template = {
@@ -32,8 +32,9 @@ angular.module('exquisiteEvalApp')
 
     $scope.tgetTemplate = function() {
         console.log('Hi!');
-        var x = Evalbackend.getTemplate(1);
-        console.log(x);
+        EvalBackend.getTemplate(1).then(function(data) {
+            $scope.template = data;
+          });
       };
 
     $scope.postTemplate = function() {
