@@ -124,10 +124,10 @@ angular.module('exquisiteEvalApp')
         return deferred.promise;
       },
 
-      getCourseTeachers: function(course, teacher) {
+      getCourseTeachers: function(course, semester) {
         var deferred = $q.defer();
 
-        $http.get(EvalSettings.backendURL + 'courses/' + course + '/' + teacher + '/teachers').
+        $http.get(EvalSettings.backendURL + 'courses/' + course + '/' + semester + '/teachers').
         success(function(data) {
           deferred.resolve(data);
         }).
