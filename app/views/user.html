@@ -1,1 +1,53 @@
-<p>This is the user view.</p>
+<h2>User evaluations</h2>
+
+<div id="evaluations">
+	<ul>
+		<li ng-repeat="eval in evaluations">
+			<a href="" ng-click="getEval(eval.CourseID, eval.Semester, eval.ID)" ng-bind="eval.CourseID"></a>
+		</li>
+	</ul>
+</div>
+<div id="questions">
+	<div id="courseQuestions">
+		<h3>Course questions</h3>
+		<span ng-repeat="courseQuestion in questions.CourseQuestions">
+			<p ng-bind="courseQuestion.TextIS"></p>
+			<span ng-if="courseQuestion.Type == 'single'">
+				<span ng-repeat="question in courseQuestion.Answers">
+					<label ng-bind="question.TextIS"></label>
+					<input type="radio" value="question.ID"> <br />
+				</span>
+			</span>
+			<span ng-if="courseQuestion.Type == 'text'">
+				<input type="text"> <br />
+			</span>
+			<span ng-if="courseQuestion.Type == 'multiple'">
+				<span ng-repeat="question in courseQuestion.Answers">
+					<label ng-bind="question.TextIS"></label>
+					<input type="checkbox" value="question.ID"> <br/>
+				</span>
+			</span>
+		</span>
+	</div>
+	<div id="teacherQuestions">
+		<h3>Teacher questions</h3>
+		<span ng-repeat="teacherQuestion in questions.TeacherQuestions">
+			<p ng-bind="teacherQuestion.TextIS"></p>
+			<span ng-if="teacherQuestion.Type == 'single'">
+				<span ng-repeat="question in teacherQuestion.Answers">
+					<label ng-bind="question.TextIS"></label>
+					<input type="radio" value="question.ID"> <br />
+				</span>
+			</span>
+			<span ng-if="teacherQuestion.Type == 'text'">
+				<input type="text"> <br />
+			</span>
+			<span ng-if="teacherQuestion.Type == 'multiple'">
+				<span ng-repeat="question in teacherQuestion.Answers">
+					<label ng-bind="question.TextIS"></label>
+					<input type="checkbox" value="question.ID"> <br/>
+				</span>
+			</span>
+		</span>
+	</div>
+</div>

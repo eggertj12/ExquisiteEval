@@ -138,10 +138,10 @@ angular.module('exquisiteEvalApp')
         return deferred.promise;
       },
 
-      getCourseEvaluation: function(course, teacher, id) {
+      getCourseEvaluation: function(course, semester, id) {
         var deferred = $q.defer();
 
-        $http.get(EvalSettings.backendURL + 'courses/' + course + '/' + teacher + '/evaluations/' + id ).
+        $http.get(EvalSettings.backendURL + 'courses/' + course + '/' + semester + '/evaluations/' + id ).
         success(function(data) {
           deferred.resolve(data);
         }).
@@ -152,10 +152,10 @@ angular.module('exquisiteEvalApp')
         return deferred.promise;
       },
 
-      addCourseEvaluation: function(course, teacher, id, evaluation) {
+      addCourseEvaluation: function(course, semester, id, evaluation) {
         var deferred = $q.defer();
 
-        $http.post(EvalSettings.backendURL + 'courses/' + course + '/' + teacher + '/evaluations/' + id, evaluation).
+        $http.post(EvalSettings.backendURL + 'courses/' + course + '/' + semester + '/evaluations/' + id, evaluation).
         success(function(data) {
           deferred.resolve(data);
         }).
