@@ -43,9 +43,9 @@ module.exports = function(config) {
       'progress',
       'coverage'
     ],
-    coverageReporter: {
-      type: 'text-summary'
-    },
+    // coverageReporter: {
+    //   type: 'text-summary'
+    // },
 
     // Start these browsers, currently available:
     // - Chrome
@@ -55,7 +55,8 @@ module.exports = function(config) {
     // - Safari (only Mac)
     // - PhantomJS
     // - IE (only Windows)
-    browsers: ['Chrome'],
+//    browsers: ['Chrome'],
+    browsers: ['PhantomJS'],
 
 
     // Continuous Integration mode
