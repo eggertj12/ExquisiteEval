@@ -1,3 +1,4 @@
+/*global MockBackend */
 'use strict';
 
 describe('Controller: AdminCtrl', function () {
