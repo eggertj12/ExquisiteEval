@@ -45,6 +45,15 @@ angular.module('exquisiteEvalApp')
         templates:[]
       };
 
+    $scope.cleanTemplate = function() {
+        $scope.template.TitleIS = '';
+        $scope.template.TitleEN = '';
+        $scope.template.IntroTextIS = '';
+        $scope.template.IntroTextEN = '';
+        $scope.template.CourseQuestions = [];
+        $scope.template.TeacherQuestions = [];
+      };
+
     $scope.addAnAnswer = function() {
       $scope.vm.displayNewA = true;
     };
@@ -134,6 +143,7 @@ angular.module('exquisiteEvalApp')
 
     $scope.abortEdit = function() {
       $scope.vm.edit = false;
+      $scope.cleanTemplate();
     };
 
   }]);
