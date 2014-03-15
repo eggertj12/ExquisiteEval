@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('exquisiteEvalApp')
-  .controller('TemplateCtrl', ['$scope', 'EvalBackend', function ($scope, EvalBackend) {
+  .controller('TemplateCtrl', ['$scope', 'EvalBackend', 'EvalState', function ($scope, EvalBackend, EvalState) {
 
 
     $scope.template = {
@@ -36,9 +36,64 @@ angular.module('exquisiteEvalApp')
     };
 
     $scope.vm = {
+        edit: false,
         displayQ: false,
-        displayA: false
+        displayA: false,
+        displayNewA: false,
+        displayT: false,
+        displayTlist: false,
+        templates:[]
       };
+
+    $scope.addAnAnswer = function() {
+      $scope.vm.displayNewA = true;
+    };
+
+    $scope.addAnswer = function() {
+      var newAnswer = angular.copy($scope.answer);
+      $scope.question.Answers.push(newAnswer);
+      $scope.vm.displayNewA = false;
+    };
+
+    $scope.showTemplates = function() {
+      EvalBackend.getTemplates().then(function(data) {
+        $scope.vm.templates = data;
+        $scope.vm.displayTlist = true;
+        $scope.vm.displayT = false;
+      });
+    };
+
+
+    $scope.editTemplate = function() {
+      $scope.vm.edit = true;
+      $scope.vm.displayTlist = false;
+      $scope.vm.displayT = false;
+    };
+
+    $scope.editSpecificTemplate = function(templateID) {
+      EvalBackend.getTemplate(templateID).then(function(data) {
+        $scope.vm.edit = true;
+        $scope.vm.displayTlist = false;
+        $scope.vm.displayT = false;
+        $scope.template = data;
+      });
+
+    };
+
+    $scope.displaySpecificTemplate = function(templateID) {
+      EvalBackend.getTemplate(templateID).then(function(data) {
+        $scope.vm.edit = false;
+        $scope.vm.displayTlist = false;
+        $scope.vm.displayT = true;
+        $scope.template = data;
+      });
+    };
+
+    $scope.iLoveJSHINT = function() {
+      console.log(EvalState);
+    };
+
+    // editing functions
 
     $scope.addingQuestion = function() {
         $scope.vm.displayQ = true;
@@ -53,7 +108,13 @@ angular.module('exquisiteEvalApp')
     };
 
     $scope.addQuestion = function() {
-        $scope.template.CourseQuestions.push($scope.question);
+        var newQuestion = angular.copy($scope.question);
+        if($scope.qhandle.teacherOrCourseQ === 'course') {
+          $scope.template.CourseQuestions.push(newQuestion);
+        }
+        else if($scope.qhandle.teacherOrCourseQ === 'teacher') {
+          $scope.template.TeacherQuestions.push(newQuestion);
+        }
         $scope.vm.displayQ = false;
       };
 
@@ -64,10 +125,15 @@ angular.module('exquisiteEvalApp')
       };
 
     $scope.postTemplate = function() {
+        $scope.template.ID = 0;
         EvalBackend.addTemplate($scope.template).then(function(data) {
-          console.log('Some kind of success! Maybe. Kinda. OK.');
           console.log(data);
+          $scope.vm.edit = false;
         });
       };
+
+    $scope.abortEdit = function() {
+      $scope.vm.edit = false;
+    };
 
   }]);

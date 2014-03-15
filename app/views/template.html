@@ -1,6 +1,38 @@
-<h1>Edit thine template</h1>
-<button class="placeholder" ng-click="tgetTemplate()">Get thine template!</button>
-<div class="template-maker">
+<h1>Work with thine template!</h1>
+<button class="placeholder" ng-click="editTemplate()">Edit a template!</button>
+<button class="placeholder" ng-click="showTemplates()">Thine templates!</button>
+<div class="templatelist-display" ng-if="vm.displayTlist">
+    <a ng-repeat="template in vm.templates" ng-click="displaySpecificTemplate(template.ID)">
+        <p>{{template.ID}}</p>
+        <p>{{template.TitleIS}}</p>
+        <p>{{template.TitleEN}}</p>
+    </a>
+</div>
+<div class="template-display" ng-if="vm.displayT">
+    <div class="titles">
+        <p>These are the template titles</p>
+        <h3>{{template.TitleIS}}</h3>
+        <h3>{{template.TitleEN}}</h3>
+        <p>These are the intro texts:</p>
+        <h4>{{template.IntroTextIS}}</h4>
+        <h4>{{template.IntroTextEN}}</h4>
+    </div>
+    <div class="questions">
+        <p>These are the course questions:</p>
+        <p ng-repeat="question in template.CourseQuestions track by $index">
+            <p>{{question.TextIS}}</p>
+            <p>{{question.TextEN}}</p>
+            <p>{{question.Type}}</p>
+        </p>
+        <p>These are the teacher questions:</p>
+        <p ng-repeat="question in template.TeacherQuestions track by $index">
+            <p>{{question.TextIS}}</p>
+            <p>{{question.TextEN}}</p>
+            <p>{{question.Type}}</p>
+        </p>
+    </div>
+</div>
+<div class="template-maker" ng-if="vm.edit">
     <div class="titles">
         <p>These are the template titles</p>
         <input placeholder="{{template.TitleIS}}" data-ng-model="template.TitleIS"/>
@@ -11,7 +43,10 @@
     </div>
     <div class="questions">
         <p ng-repeat="question in template.CourseQuestions track by $index">
-            {{question.text}}
+            {{question.TextIS}}
+        </p>
+        <p ng-repeat="question in template.TeacherQuestions track by $index">
+            {{question.TextIS}}
         </p>
         <a class="add-question" ng-click="addingQuestion()">Add question</a>
         <div class ="add-question" ng-if="vm.displayQ">
@@ -32,14 +67,20 @@
                 <br/>
             </div>
             <div class="answers" ng-if="vm.displayA">
-                <input placeholder="Icelandic text" data-ng-model="answer.TextIS"/>
-                <input placeholder="English text !" data-ng-model="answer.TextEN"/>
-                <input placeholder="for image TODO" data-ng-model="answer.ImageURL"/>
-                <input placeholder="WEIGHT   TODO!" data-ng-model="answer.Weight"/>
-            </div> 
+                <button class="" ng-click="addAnAnswer()">Add an answer</button>
+                <div class="newAnswer" ng-if="vm.displayNewA">
+                    <input placeholder="Icelandic text" data-ng-model="answer.TextIS"/>
+                    <input placeholder="English text !" data-ng-model="answer.TextEN"/>
+                    <input placeholder="for image TODO" data-ng-model="answer.ImageURL"/>
+                    <input placeholder="WEIGHT   TODO!" data-ng-model="answer.Weight"/>
+                    <button class="" ng-click="addAnswer()">Add the answer</button>
+                </div>
+            </div>
             <button ng-click="addQuestion()">Add the question</button>
         </div>
 
     </div>
+    <button class="" ng-click="abortEdit()">Abort thine edit!</button>
+    <button class="" ng-click="postTemplate()">Post thine template!</button>
 </div>
-<button class="" ng-click="postTemplate()">Post thine template!</button>
+
