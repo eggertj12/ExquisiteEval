@@ -6,17 +6,18 @@ describe('Controller: UserCtrl', function () {
   beforeEach(module('exquisiteEvalApp'));
 
   var UserCtrl,
+    $location,
+    EvalBackend,
     scope;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope) {
+  beforeEach(inject(function ($controller, $rootScope, $injector) {
     scope = $rootScope.$new();
+    $location = $injector.get('$location');
+    EvalBackend = $injector.get('EvalBackend');
     UserCtrl = $controller('UserCtrl', {
       $scope: scope
     });
   }));
 
-  it('should attach a list of awesomeThings to the scope', function () {
-    expect(scope.awesomeThings.length).toBe(3);
-  });
 });
