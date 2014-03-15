@@ -33,12 +33,12 @@ describe('Controller: AdminCtrl', function () {
   it('should move you to templates view', function() {
     // Just to fulfill 100% code coverage, should be in an e2e test
 
-    scope.gotoTemplates();
+    scope.gotoTemplate(1);
     expect($location.url()).toBe('/template');
   });
 
-  it('should load templates', function() {
-    expect(scope.templates.length).toBe(1);
+  it('should load evaluations', function() {
+    expect(scope.vm.evaluations.length).toBe(1);
   });
 
 });

@@ -4,14 +4,17 @@ angular.module('exquisiteEvalApp')
   .controller('AdminCtrl', ['$scope', '$location', 'EvalBackend',
     function ($scope, $location, EvalBackend) {
 
-    $scope.templates = [];
+    $scope.vm = {
+      templates: [],
+      evaluations: []
+    };
 
-    EvalBackend.getTemplates().then(function(data) {
-      $scope.templates = data;
+    EvalBackend.getEvaluations().then(function(data) {
+      $scope.vm.evaluations = data;
     });
 
 
-    $scope.gotoTemplates = function() {
+    $scope.gotoTemplate = function() {
         $location.url('/template');
       };
   }]);
