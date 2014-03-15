@@ -2,17 +2,41 @@
 <button class="placeholder" ng-click="tgetTemplate()">Get thine template!</button>
 <div class="template-maker">
     <div class="titles">
+        <p>These are the template titles</p>
         <input placeholder="{{template.TitleIS}}" data-ng-model="template.TitleIS"/>
-        <input placeholder="{{template.TitleEN}}" data-ng-model="template.TitleEN"
+        <input placeholder="{{template.TitleEN}}" data-ng-model="template.TitleEN"/>
+        <p>These are the intro texts</p>
+        <input placeholder="{{template.IntroTextIS}}" data-ng-model="template.IntroTextIS"/>
+        <input placeholder="{{template.IntroTextEN}}" data-ng-model="template.IntroTextEN"/>
     </div>
     <div class="questions">
         <p ng-repeat="question in template.CourseQuestions track by $index">
             {{question.text}}
         </p>
         <a class="add-question" ng-click="addingQuestion()">Add question</a>
-        <div ng-if="vm.displayQ">
+        <div class ="add-question" ng-if="vm.displayQ">
             <p>Here we will add some stuff on the details to add to a question</p>
-            <input placeholder="Question text" class="" data-ng-model="question.text"/>
+            <div class="radio-buttons cQ">
+                <input type="radio" data-ng-model="qhandle.teacherOrCourseQ" value="teacher"/>
+                <input type="radio" data-ng-model="qhandle.teacherOrCourseQ" value="course"/>
+            </div>
+            <input placeholder="Icelandic text" data-ng-model="question.TextIS"/>
+            <input placeholder="English text !" data-ng-model="question.TextEN"/>
+            <input placeholder="for image TODO" data-ng-model="question.ImageURL"/>
+            <div class="radio buttons">
+                <input type="radio" data-ng-model="question.Type" value="text"/ ng-change="undisplayA()"/>
+                <br/>
+                <input type="radio" data-ng-model="question.Type" value="single"/ ng-change="displayA()"/>
+                <br/>
+                <input type="radio" data-ng-model="question.Type" value="multiple" ng-change="displayA()"/>
+                <br/>
+            </div>
+            <div class="answers" ng-if="vm.displayA">
+                <input placeholder="Icelandic text" data-ng-model="answer.TextIS"/>
+                <input placeholder="English text !" data-ng-model="answer.TextEN"/>
+                <input placeholder="for image TODO" data-ng-model="answer.ImageURL"/>
+                <input placeholder="WEIGHT   TODO!" data-ng-model="answer.Weight"/>
+            </div> 
             <button ng-click="addQuestion()">Add the question</button>
         </div>
 
