@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('exquisiteEvalApp', [
-  'ngRoute'
+  'ngRoute', 'ngMoment', 'ui.bootstrap'
 ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -24,6 +24,10 @@ angular.module('exquisiteEvalApp', [
       .when('/template', {
         templateUrl: 'views/template.html',
         controller: 'TemplateCtrl'
+      })
+      .when('/evaluation', {
+        templateUrl: 'views/evaluation.html',
+        controller: 'EvaluationCtrl'
       })
       .otherwise({
         redirectTo: '/'

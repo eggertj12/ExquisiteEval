@@ -1,0 +1,34 @@
+<form ng-submit="addEvaluation()">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <select class="form-control" ng-model="evaluation.TemplateID" ng-options="t.ID as t.TitleEN for t in templates" ng-required="true">
+                    <option value="">-- Select template --</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <p class="input-group">
+              <label class="sr-only" for="StartDate">Start date:</label>
+              <input placeholder="Start date" id="StartDate" type="text" class="form-control" datepicker-popup="{{format}}" ng-model="evaluation.StartDate" is-open="startOpen" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button class="btn btn-default" ng-click="open($event, 'startOpen')"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+        </div>
+        <div class="col-md-4">
+            <label class="sr-only" for="EndDate">End date:</label>
+            <p class="input-group">
+              <input placeholder="End date" id="EndDate" type="text" class="form-control" datepicker-popup="{{format}}" ng-model="evaluation.EndDate" is-open="endOpen" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button class="btn btn-default" ng-click="open($event, 'endOpen')"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <button type="submit">Add evaluation</button>    
+        </div>
+    </div>
+</form>

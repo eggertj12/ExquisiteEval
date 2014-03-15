@@ -1,4 +1,3 @@
-/*global MockBackend */
 'use strict';
 
 describe('Controller: AdminCtrl', function () {
@@ -34,8 +33,15 @@ describe('Controller: AdminCtrl', function () {
   it('should move you to templates view', function() {
     // Just to fulfill 100% code coverage, should be in an e2e test
 
-    scope.gotoTemplate(1);
+    scope.addTemplate();
     expect($location.url()).toBe('/template');
+  });
+
+  it('should move you to evaluations view', function() {
+    // Just to fulfill 100% code coverage, should be in an e2e test
+
+    scope.addEvaluation();
+    expect($location.url()).toBe('/evaluation');
   });
 
   it('should load evaluations', function() {

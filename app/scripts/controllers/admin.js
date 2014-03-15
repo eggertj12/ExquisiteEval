@@ -13,8 +13,11 @@ angular.module('exquisiteEvalApp')
       $scope.vm.evaluations = data;
     });
 
-
-    $scope.gotoTemplate = function() {
+    $scope.addTemplate = function() {
         $location.url('/template');
+      };
+
+    $scope.addEvaluation = function() {
+        $location.url('/evaluation');
       };
   }]);
