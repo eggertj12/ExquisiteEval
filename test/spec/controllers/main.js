@@ -6,17 +6,30 @@ describe('Controller: MainCtrl', function () {
   beforeEach(module('exquisiteEvalApp'));
 
   var MainCtrl,
+    EvalState,
+    $location,
     scope;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope) {
+  beforeEach(inject(function ($controller, $rootScope, $injector) {
     scope = $rootScope.$new();
     MainCtrl = $controller('MainCtrl', {
       $scope: scope
     });
+
+    $location = $injector.get('$location');
+    EvalState = $injector.get('EvalState');
   }));
 
-  it('should attach a list of awesomeThings to the scope', function () {
-    expect(scope.awesomeThings.length).toBe(3);
+  it('should logout and redirect', function () {
+    // Arrange
+
+    // Act
+    scope.logout();
+    scope.$apply();
+
+    // Assert
+    expect(EvalState.Token).toBe(null);
+    expect($location.url()).toBe('/login');
   });
 });

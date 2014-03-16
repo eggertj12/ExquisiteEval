@@ -1,14 +1,15 @@
 'use strict';
 
 angular.module('exquisiteEvalApp')
-  .controller('AdminCtrl', ['$scope', '$location', 'EvalBackend',
-    function ($scope, $location, EvalBackend) {
+  .controller('AdminCtrl', ['$scope', '$location', 'EvalBackend', 'EvalState',
+  function ($scope, $location, EvalBackend, EvalState) {
+    EvalState.PageTitle = 'Admin panel';
 
     $scope.vm = {
       templates: [],
       evaluations: [],
       evaluation: {
-        TemplateTitleEN: 'Select a template to view results'
+        TemplateTitleEN: 'Select an evaluation to view results'
       }
     };
 
@@ -28,5 +29,5 @@ angular.module('exquisiteEvalApp')
       EvalBackend.getEvaluation(id).then(function(data) {
         $scope.vm.evaluation = data;
       });
-    }      
+    };
   }]);

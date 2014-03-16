@@ -25,12 +25,22 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="container-fluid">
-        <div class="padding" ng-view="">
-            
+    <div class="breather" ng-controller="MainCtrl">
+        <header class="Header clearfix">
+            <aside class="Header-buttons">
+                <button class="btn btn-default" ng-show="state.Token !== null" ng-click="logout()">Logout</button>
+            </aside>
+            <h1 class="Header-title Header-title--main">Exquisite Eval:</h1><h2 class="Header-title" ng-bind="state.PageTitle"></h2>
+        </header>
+        <div class="container-fluid">
+            <div class="padding" ng-view="">
+                
+            </div>
         </div>
+        <footer class="footer">
+            <p>© 2014 - Phil Collins Group</p>
+        </footer>
     </div>
-
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -73,6 +83,7 @@
     <script src="scripts/services/AuthInterceptor.js"></script>
     <script src="scripts/controllers/evaluation.js"></script>
     <script src="scripts/directives/AdminEvalResult.js"></script>
+    <script src="scripts/controllers/Main.js"></script>
     <!-- endbuild -->
 
 </body>

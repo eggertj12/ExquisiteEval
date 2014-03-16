@@ -5,10 +5,6 @@ angular.module('exquisiteEvalApp', [
 ])
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
-      })
       .when('/login', {
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl'
@@ -30,7 +26,7 @@ angular.module('exquisiteEvalApp', [
         controller: 'EvaluationCtrl'
       })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/login'
       });
   }).
   config(function ($httpProvider) {

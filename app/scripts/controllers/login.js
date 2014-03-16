@@ -3,6 +3,8 @@
 angular.module('exquisiteEvalApp')
   .controller('LoginCtrl', ['$scope', '$location', '$http', 'EvalSettings', 'EvalState',
   function ($scope, $location, $http, EvalSettings, EvalState) {
+    EvalState.PageTitle = 'Course evaluations';
+
     $scope.user = {
       user: '',
       pass: ''

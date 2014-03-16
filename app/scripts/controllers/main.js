@@ -1,10 +1,13 @@
 'use strict';
 
 angular.module('exquisiteEvalApp')
-  .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+  .controller('MainCtrl', ['$scope', '$location', 'EvalState',
+  function ($scope, $location, EvalState) {
+    $scope.state = EvalState;
+
+    $scope.logout = function() {
+      EvalState.Token = null;
+      $location.url('/login');
+    };
+
+  }]);
