@@ -63,16 +63,48 @@ function MockBackend($q) {
       return deferred.promise;
     },
 
-    getCourseTeachers: function() {
+    getCourseTeachers: function(course, semester) {
       var deferred = $q.defer();
-      deferred.resolve([{id:1}]);
+      deferred.resolve([{Username:'dabs',FullName:'Daníel Brandur Sigurgeirsson',SSN:'1203735289',Email:'dabs@ru.is',Role:'teacher',ImageURL:'http://www.ru.is/kennarar/dabs/img/12/1203735289.jpg'}]);
 
       return deferred.promise;
     },
 
     getCourseEvaluation: function(course, semester, id) {
       var deferred = $q.defer();
-      deferred.resolve({id: id, course: course, semester: semester});
+      deferred.resolve({
+        ID: 8,
+        TitleIS: 'Kennslumat',
+        IntroTextIS: 'endilega takið þetta kennslumat',
+        CourseQuestions: [
+        {
+          ID: 37,
+          TextIS: 'Hvernig er áfangin?',
+          Type: 'text'
+        },
+        {
+          "ID": 39,
+          "TextIS": "Course Question 3 - multiple",
+          "TextEN": "Course Question 3",
+          "ImageURL": "",
+          "Type": "multiple",
+          "Answers": [
+          {
+            "ID": 52,
+            "TextIS": "Svarmöguleiki 1",
+            "TextEN": "Answer1",
+            "ImageURL": "",
+            "Weight": 1
+          }]
+        }],
+        TeacherQuestions: [
+        {
+          ID: 40,
+          TextIS: 'Hvernig var þessi kennari?',
+          Type: 'text',
+          Answers: []
+        }]
+      });
 
       return deferred.promise;
     },

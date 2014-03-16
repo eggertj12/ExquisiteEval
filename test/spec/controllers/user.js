@@ -34,9 +34,15 @@ describe('Controller: UserCtrl', function () {
 
     scope.getEval('T-427-WEPO', '20141', 1);
     scope.$apply();
-    expect(scope.course).toBe('T-427-WEPO');
-    expect(scope.semester).toBe('20141');
-    expect(scope.teachers.length).toBe(1);
+    expect(scope.evalInfo.course).toBe('T-427-WEPO');
+    expect(scope.evalInfo.semester).toBe('20141');
+    expect(scope.evalInfo.teachers.length).toBe(1);
+    expect(scope.evalInfo.teachers[0].FullName).toBe('Daníel Brandur Sigurgeirsson');
+    expect(scope.evalInfo.courseQuestions.length).toBe(2);
+    expect(scope.evalInfo.courseQuestions[0].question.text).toBe('Hvernig er áfangin?');
+    expect(scope.evalInfo.teacherQuestions.length).toBe(1);
+    expect(scope.evalInfo.teacherQuestions[0].questions.length).toBe(1);
+    expect(scope.evalInfo.teacherQuestions[0].questions[0].question.text).toBe('Hvernig var þessi kennari?');
   });
 
 });
