@@ -1,6 +1,11 @@
 $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 
-@import 'login.scss';
+// Import components
+@import 'login';
+@import 'adminevallist';
+@import 'adminevalresult';
+
+// And of course bootstrap also
 @import 'sass-bootstrap/lib/bootstrap';
 
 .browsehappy {

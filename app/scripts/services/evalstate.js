@@ -2,5 +2,6 @@
 
 angular.module('exquisiteEvalApp')
   .value('EvalState', {
-    Token: null
+    Token: null,
+    TemplateID: null
   });

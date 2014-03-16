@@ -1,13 +1,14 @@
 'use strict';
 
 angular.module('exquisiteEvalApp')
-  .controller('EvaluationCtrl', ['$scope', '$location', 'EvalBackend',
-  function ($scope, $location, EvalBackend) {
+  .controller('EvaluationCtrl', ['$scope', '$location', 'EvalBackend', 'EvalState',
+  function ($scope, $location, EvalBackend, EvalState) {
+
 
     $scope.evaluation = {
-      StartDate: null,
-      EndDate: null,
-      TemplateID: null
+      StartDate: new Date(),
+      EndDate: new Date(),
+      TemplateID: EvalState.TemplateID
     };
 
     // Variables related to datepicker
@@ -36,6 +37,10 @@ angular.module('exquisiteEvalApp')
       EvalBackend.addEvaluation($scope.evaluation).then(function() {
         $location.url('/admin');
       });
+    };
+
+    $scope.cancel = function() {
+      $location.url('/admin');
     };
 
   }]);

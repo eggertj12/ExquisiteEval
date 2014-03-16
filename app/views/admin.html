@@ -1,25 +1,28 @@
 <div class="row">
-    <div class="col-lg-12">
+    <div class="col-md-12">
         <h1>Exquisite eval admin panel.</h1>
     </div>
 </div>
 
 <div class="row">
-    <div class="col-lg-4">
+    <div class="col-md-4">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-md-6">
                 <button class="btn" ng-click="addTemplate()">Add Template</button>
             </div>
-            <div class="col-lg-6">
+            <div class="col-md-6">
                 <button class="btn" ng-click="addEvaluation()">Add Evaluation</button>
             </div>
         </div>
         <ul class="AdminEvalList">
             <li class="AdminEvalList-item" ng-repeat="evaluation in vm.evaluations">
-                <span class="AdminEvalList-item-title" ng-bind="evaluation.TemplateTitleEN"></span>
-                <span class="AdminEvalList-item-date" ng-bind="evaluation.StartDate | amDateFormat:'ll'"></span>
-                <span class="AdminEvalList-item-date" ng-bind="evaluation.EndDate | amDateFormat:'ll'"></span>
+                <p class="AdminEvalList-item-title" ng-bind="evaluation.TemplateTitleEN" ng-click="getEvaluation(evaluation.ID)"></p>
+                <span class="AdminEvalList-item-date">Open from: <time ng-bind="evaluation.StartDate | amDateFormat:'ll'"></time></span>
+                <span class="AdminEvalList-item-date">Until: <time ng-bind="evaluation.EndDate | amDateFormat:'ll'"></time></span>
             </li>
         </ul>
+    </div>
+    <div class="col-md-8">
+        <ee-admin-eval-result ng-model="vm.evaluation"></ee-admin-eval-result>
     </div>
 </div>

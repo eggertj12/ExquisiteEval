@@ -22,7 +22,10 @@ module.exports = function(config) {
       'app/scripts/*.js',
       'app/scripts/**/*.js',
       'test/mock/**/*.js',
-      'test/spec/**/*.js'
+      'test/spec/**/*.js',
+
+      //include the directory where directive templates are stored.
+      'app/templates/*.html'
     ],
 
     // list of files / patterns to exclude
@@ -39,9 +42,10 @@ module.exports = function(config) {
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: true,
 
-    // For code coverage reporting
+    // For code coverage reporting and directive template processing used in testing
     preprocessors: {
-      'app/scripts/**/*.js': 'coverage'
+      'app/scripts/**/*.js': 'coverage',
+      'app/templates/*.html': 'ng-html2js'
     },
     reporters: [
       'progress',
@@ -50,6 +54,14 @@ module.exports = function(config) {
     // coverageReporter: {
     //   type: 'text-summary'
     // },
+
+    // This works around different root paths for testing and actual environment
+    ngHtml2JsPreprocessor: {
+      // strip this from the file path
+      stripPrefix: 'app/',
+      // prepend this to the
+      prependPrefix: ''
+    },
 
     // Start these browsers, currently available:
     // - Chrome

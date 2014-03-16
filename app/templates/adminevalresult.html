@@ -1,0 +1,12 @@
+<div class="AdminEvalResult">
+    <header class="AdminEvalResult-header">
+        <h1 class="AdminEvalResult-header-text" ng-bind="evaluation.TemplateTitleEN"></h1>
+    </header>
+    <div class="form-group">
+        <label for="selectCourse">Select course</label>
+        <select id="selectCourse" class="form-control" ng-model="selectedID" ng-options="c.ID as c.CourseNameEN for c in evaluation.Courses" ng-required="true">
+            <option value="">-- Select Course --</option>
+        </select>
+    </div>
+
+</div>

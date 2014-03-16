@@ -18,10 +18,17 @@ describe('Controller: EvaluationCtrl', function () {
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope, _$injector_) {
+    var EvalState;
+
     scope = $rootScope.$new();
     $injector = _$injector_;
 
     $provide.service('EvalBackend', MockBackend);
+
+    // Only needed for one test but has to run before controller is instantiated
+    // Better to run here for all tests than to have to create controller in each test
+    EvalState = $injector.get('EvalState');
+    EvalState.TemplateID = 1;
 
     EvaluationCtrl = $controller('EvaluationCtrl', {
       $scope: scope
@@ -53,6 +60,29 @@ describe('Controller: EvaluationCtrl', function () {
 
     // Assert
     expect($location.url()).toBe('/admin');
+  });
+
+  it('should redirect to admin on cancel', function () {
+    // Arrange
+    $location = $injector.get('$location');
+
+    // Act
+    scope.cancel();
+    scope.$apply();
+
+    // Assert
+    expect($location.url()).toBe('/admin');
+  });
+
+  it('should get template id from state service if available', function () {
+    // Arrange
+    // All arrangement in beforeEach
+
+    // Act
+    // Default action of controller
+
+    // Assert
+    expect(scope.evaluation.TemplateID).toBe(1);
   });
 
 });

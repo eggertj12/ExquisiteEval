@@ -6,7 +6,10 @@ angular.module('exquisiteEvalApp')
 
     $scope.vm = {
       templates: [],
-      evaluations: []
+      evaluations: [],
+      evaluation: {
+        TemplateTitleEN: 'Select a template to view results'
+      }
     };
 
     EvalBackend.getEvaluations().then(function(data) {
@@ -14,10 +17,16 @@ angular.module('exquisiteEvalApp')
     });
 
     $scope.addTemplate = function() {
-        $location.url('/template');
-      };
+      $location.url('/template');
+    };
 
     $scope.addEvaluation = function() {
-        $location.url('/evaluation');
-      };
+      $location.url('/evaluation');
+    };
+
+    $scope.getEvaluation = function(id) {
+      EvalBackend.getEvaluation(id).then(function(data) {
+        $scope.vm.evaluation = data;
+      });
+    }      
   }]);
