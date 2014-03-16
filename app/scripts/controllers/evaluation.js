@@ -3,7 +3,7 @@
 angular.module('exquisiteEvalApp')
   .controller('EvaluationCtrl', ['$scope', '$location', 'EvalBackend', 'EvalState',
   function ($scope, $location, EvalBackend, EvalState) {
-
+    EvalState.PageTitle = 'Add evaluation';
 
     $scope.evaluation = {
       StartDate: new Date(),

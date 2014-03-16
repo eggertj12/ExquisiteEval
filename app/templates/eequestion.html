@@ -1,0 +1,24 @@
+<article class="Question">
+    <header class="Question-header" ng-click="toggleClosed()" >
+        <h1 class="Question-header-text" ng-bind="question.TextEN"></h1>
+        <span class="Question-header-type" ng-bind="question.Type"></span>
+    </header>
+
+    <ul class="Question-textlist" ng-class="{'Question-textlist--closed': question.closed}">
+        <li class="Question-textlist-item" ng-repeat="res in question.TextResults" ng-bind="res"></li>
+    </ul>
+
+    <div class="Question-graph">
+        <ul class="Question-graph-options" ng-class="{'Question-graph-options--closed': question.closed}">
+            <li ng-repeat="option in question.OptionsResults">
+                <span class="Question-graph-option-text" ng-bind="option.AnswerTextEN"></span>
+                <span class="Question-graph-option-count" ng-bind="option.Count"></span>
+                <span class="Question-graph-option-color" style="background:{{option.Color}};"></span>
+            </li>
+        </ul>
+        <div class="Question-graph-container" ng-click="toggleClosed()" ng-class="{'Question-graph-container--closed': question.closed}">
+            <canvas class="Question-graph-canvas" width="150" height="150">
+            </canvas>
+        </div>
+    </div>
+</article>

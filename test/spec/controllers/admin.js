@@ -48,4 +48,48 @@ describe('Controller: AdminCtrl', function () {
     expect(scope.vm.evaluations.length).toBe(1);
   });
 
+  it('getEvaluation should load a single evaluation', function() {
+    // Arrange
+
+    // Act
+    scope.getEvaluation('smuuuuu');
+    scope.$apply();
+
+    // Assert
+    expect(scope.vm.evaluation.id).toBe('smuuuuu');
+  });
+
+  it('selectCourse should update viewModel with input', function() {
+    // Arrange
+    var dummy = {foo: 'bar'};
+
+    // Act
+    scope.selectCourse(dummy);
+
+    // Assert
+    expect(scope.vm.course.foo).toBe('bar');
+  });
+
+  it('openTeacher should set undfined to true', function() {
+    // Arrange
+    var dummy = {};
+
+    // Act
+    scope.openTeacher(dummy);
+
+    // Assert
+    expect(dummy.open).toBe(true);
+  });
+
+  it('openTeacher should set true to false', function() {
+    // Arrange
+    var dummy = {open: true};
+
+    // Act
+    scope.openTeacher(dummy);
+
+    // Assert
+    expect(dummy.open).toBe(false);
+  });
+
 });

@@ -1,7 +1,6 @@
 <form ng-submit="addEvaluation()">
     <div class="row">
         <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
-            <h1>Add evaluation</h1>
             <div class="form-group">
                 <label for="TemplateID">Select template</label>
                 <select id="TemplateID" class="form-control" ng-model="evaluation.TemplateID" ng-options="t.ID as t.TitleEN for t in templates" ng-required="true">

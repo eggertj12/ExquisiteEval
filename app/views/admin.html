@@ -1,20 +1,111 @@
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-sm-4">
         <div class="row">
-            <div class="col-md-12">
-                <button class="btn" ng-click="addTemplate()">Add Template</button>
-                <button class="btn" ng-click="addEvaluation()">Add Evaluation</button>
+            <div class="col-xs-12">
+                <h3>Evaluations</h3>
             </div>
         </div>
-        <ul class="AdminEvalList">
-            <li class="AdminEvalList-item" ng-repeat="evaluation in vm.evaluations">
-                <p class="AdminEvalList-item-title" ng-bind="evaluation.TemplateTitleEN" ng-click="getEvaluation(evaluation.ID)"></p>
-                <span class="AdminEvalList-item-date">Opens: <time ng-bind="evaluation.StartDate | amDateFormat:'ll'"></time></span>
-                <span class="AdminEvalList-item-date">Closes: <time ng-bind="evaluation.EndDate | amDateFormat:'ll'"></time></span>
-            </li>
-        </ul>
+        <form class="form-horizontal">
+            <div class="form-group col-sm-12 col-xs-6">
+                <button class="btn btn-default" ng-click="addTemplate()"><span class="glyphicon glyphicon-plus"></span> Template</button>
+                <button class="btn btn-default" ng-click="addEvaluation()"><span class="glyphicon glyphicon-plus"></span> Evaluation</button>
+            </div>
+            <div class="form-group col-sm-12 col-xs-6">
+                <label class="col-xs-3 control-label" for="evalFilter">Filter</label>
+                <div class="col-xs-9">
+                  <select id="evalFilter" class="form-control input-sm" ng-model="vm.evalFilter" ng-options="f.key as f.value for f in filterBy">
+                  </select>
+                </div>
+            </div>
+        </form>
+        <div class="row">
+            <div class="col-xs-12">
+                <ul class="AdminEvalList">
+                    <li class="AdminEvalList-item" ng-repeat="evaluation in vm.evaluations | filter:{ 'Status': vm.evalFilter}">
+                        <p class="AdminEvalList-item-title" ng-bind="evaluation.TemplateTitleEN" ng-click="getEvaluation(evaluation.ID)"></p>
+                        <span class="AdminEvalList-item-period">Opens: 
+                            <time class="AdminEvalList-item-period-date" ng-bind="evaluation.StartDate | amDateFormat:'ll'"></time>
+                        </span>
+                        <span class="AdminEvalList-item-period">Closes: 
+                            <time class="AdminEvalList-item-period-date" ng-bind="evaluation.EndDate | amDateFormat:'ll'"></time>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
-    <div class="col-md-8">
-        <ee-admin-eval-result ng-model="vm.evaluation"></ee-admin-eval-result>
+    <div class="col-sm-8">
+        <div class="row">
+            <div class="col-xs-12">
+                <h3>Results</h3>
+            </div>
+        </div>
+        <div class="AdminEvalResult">
+            <header class="AdminEvalResult-header">
+                <h1 class="AdminEvalResult-header-text" ng-bind="vm.evaluation.TemplateTitleEN"></h1>
+            </header>
+            <form class="form-horizontal">
+                <div class="form-group col-xs-12">
+                    <label class="col-xs-3" for="selectCourse">Select course</label>
+                    <div class="col-xs-9">
+                        <select id="selectCourse" class="form-control" ng-model="vm.course" ng-options="c as c.CourseNameEN for c in vm.evaluation.Courses" ng-required="true" ng-change="selectCourse(vm.course)">
+                        </select>
+                    </div>
+                </div>
+            </form>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="AdminEvalResult-course" ng-show="vm.course.CourseID">
+                        <span ng-bind="vm.course.CourseID" class="AdminEvalResult-course-id"></span>
+                        <span ng-bind="vm.course.CourseNameEN" class="AdminEvalResult-course-title"></span>
+                        <span ng-bind="vm.course.Semester" class="AdminEvalResult-course-semester"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Display course questions -->
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h4 class="AdminEvalResult-heading AdminEvalResult-heading--clickable" ng-click="openTeacher(vm.course)">Course questions</h4>
+                        </div>
+                    </div>
+                    <div class="row" collapse="!vm.course.open">
+                        <div class="col-xs-12">
+                            <div class="AdminEvalResult-question" ng-repeat="question in vm.course.Questions | filter:{ 'TeacherSSN': null} ">
+                                <article ee-question ng-model="question"></article>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loop all teachers -->
+            <div class="row">
+                <div class="col-xs-12">
+                    <h4 class="AdminEvalResult-heading">Teacher questions</h4>
+                    <section class="AdminEvalResult-teacher clearfix"ng-repeat="teacher in vm.teachers[vm.course.CourseID][vm.course.Semester]">
+
+                        <!-- Teacher info -->
+                        <div class="AdminEvalResult-teacher-image" ng-click="openTeacher(teacher)" >
+                            <img ng-src="{{teacher.ImageURL}}" class="img-thumbnail" />
+                        </div>
+                        <h1 ng-bind="teacher.FullName" class="AdminEvalResult-teacher-name" ng-click="openTeacher(teacher)" ></h1>
+                        <p class="AdminEvalResult-teacher-details">
+                            <span ng-bind="teacher.Role" class="AdminEvalResult-teacher-details-role"></span>
+                            <span ng-bind="teacher.SSN" class="AdminEvalResult-teacher-details-ssn"></span>
+                        </p>
+
+                        <!-- Teacher questions -->
+                        <div collapse="!teacher.open" class="AdminEvalResult-teacher-questions">
+                            <div class="AdminEvalResult-question" ng-repeat="question in vm.course.Questions | filter:{ 'TeacherSSN': teacher.SSN} ">
+                                <article ee-question ng-model="question"></article>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

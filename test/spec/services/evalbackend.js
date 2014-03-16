@@ -329,7 +329,7 @@ describe('Service: EvalBackend,', function () {
   // Tests for getEvaluation
   // ------------------------------------------------------------------------
 
-  describe('getTemplate', function() {
+  describe('getEvaluation', function() {
 
     it('should reject calls without id', function () {
       var result;
@@ -350,7 +350,7 @@ describe('Service: EvalBackend,', function () {
       // Arrange
       $httpBackend.expectGET('api/v1/evaluations/1');
       $httpBackend.when('GET', 'api/v1/evaluations/1').respond(
-          {id: 1, TitleIS: 'Prufa', TitleEN: 'Testing', IntroTextIS: 'Prufu template', IntroTextEN: 'Test template',
+          {id: 1, TemplateTitleIS: 'Prufa', TitleEN: 'Testing', IntroTextIS: 'Prufu template', IntroTextEN: 'Test template',
           CourseQuestions: [], TeacherQuestions: []}
         );
 
@@ -363,7 +363,7 @@ describe('Service: EvalBackend,', function () {
       $httpBackend.flush();
 
       // Assert
-      expect(result.TitleIS).toBe('Prufa');
+      expect(result.TemplateTitleIS).toBe('Prufa');
     });
 
     it('should handle backend errors', function () {

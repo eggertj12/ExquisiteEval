@@ -3,6 +3,7 @@ $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 // Import components
 @import 'login';
 @import 'header';
+@import 'question';
 @import 'adminevallist';
 @import 'adminevalresult';
 
@@ -39,7 +40,7 @@ html, body {
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
-.marketing,
+.main,
 .footer {
     padding-left: 15px;
     padding-right: 15px;
@@ -85,15 +86,6 @@ html, body {
     padding: 14px 24px;
 }
 
-/* Supporting marketing content */
-.marketing {
-    margin: 40px 0;
-}
-
-.marketing p + h4 {
-    margin-top: 28px;
-}
-
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
     .container-fluid {
@@ -106,7 +98,7 @@ html, body {
     }
 
     /* Remove the padding we set earlier */
-    .marketing {
+    .main {
         padding-left: 0;
         padding-right: 0;
     }

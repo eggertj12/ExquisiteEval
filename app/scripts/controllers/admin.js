@@ -5,12 +5,22 @@ angular.module('exquisiteEvalApp')
   function ($scope, $location, EvalBackend, EvalState) {
     EvalState.PageTitle = 'Admin panel';
 
+    $scope.filterBy = [
+      { key: '', value: 'All' },
+      { key: 'new', value: 'New' },
+      { key: 'open', value: 'Open' },
+      { key: 'closed', value: 'Closed' }
+    ];
+
     $scope.vm = {
       templates: [],
       evaluations: [],
       evaluation: {
         TemplateTitleEN: 'Select an evaluation to view results'
-      }
+      },
+      teachers: {},
+      course: null,
+      evalFilter: $scope.filterBy[0].key
     };
 
     EvalBackend.getEvaluations().then(function(data) {
@@ -28,6 +38,39 @@ angular.module('exquisiteEvalApp')
     $scope.getEvaluation = function(id) {
       EvalBackend.getEvaluation(id).then(function(data) {
         $scope.vm.evaluation = data;
+        $scope.selectCourse(data.Courses[0]);
       });
     };
+
+    $scope.selectCourse = function(course) {
+      // If no answers for evaluation then no course is defined
+      if (!angular.isDefined(course)) {
+        $scope.vm.course = {};
+        return;
+      }
+
+      // load teachers if not alraedy available
+      var skip = (angular.isDefined($scope.vm.teachers[course.CourseID])) && (angular.isDefined($scope.vm.teachers[course.CourseID][course.Semester]));
+
+      if (!skip) {
+        EvalBackend.getCourseTeachers(course.CourseID, course.Semester).then(function(data) {
+          if (!angular.isDefined($scope.vm.teachers[course.CourseID])) {
+            $scope.vm.teachers[course.CourseID] = {};
+          }
+          $scope.vm.teachers[course.CourseID][course.Semester] = data;
+        });
+      }
+
+      // Set selected course
+      $scope.vm.course = course;
+    };
+
+    $scope.openTeacher = function(teacher) {
+      if (!teacher.open) {
+        teacher.open = true;
+      } else {
+        teacher.open = false;
+      }
+    };
+
   }]);

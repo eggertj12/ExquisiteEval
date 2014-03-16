@@ -7,5 +7,84 @@
 }
 
 .AdminEvalResult-header-text {
-    font-size: 2em;
+    font-size: 1.4em;
 }
+
+.AdminEvalResult-course {
+    border-bottom: 1px solid #aaa;
+    padding-bottom: 3px;
+    margin-bottom: 6px;
+}
+
+.AdminEvalResult-course-id {
+    display: inline-block;
+    min-width: 7em;
+    width: 20%;
+    font-size: 0.8em;
+}
+
+.AdminEvalResult-heading {
+}
+
+.AdminEvalResult-heading--clickable {
+    cursor: pointer;
+}
+
+.AdminEvalResult-course-title {
+    display: inline-block;
+    min-width: 16em;
+    width: 60%;
+    font-weight: bold;
+}
+
+.AdminEvalResult-course-semester {
+    display: inline-block;
+    min-width: 7em;
+    width: 15%;
+    font-style: italic;
+}
+
+.AdminEvalResult-teacher {
+    padding:5px;
+    border-top: 1px solid #eee;
+}
+
+.AdminEvalResult-teacher-image {
+    width: 40px;
+    margin-right: 10px;
+    float: left;
+    cursor: pointer; 
+}
+
+.AdminEvalResult-teacher-name {
+    font-size: 1em;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    cursor: pointer; 
+}
+
+.AdminEvalResult-teacher-details {
+    margin: 0;
+    padding: 0;
+    font-size: 0.8em;
+}
+
+.AdminEvalResult-teacher-details-ssn {
+    display: inline-block;
+    min-width: 7em;
+    width: 15%;
+    font-style: italic;
+}
+
+.AdminEvalResult-teacher-details-role {
+    display: inline-block;
+    min-width: 7em;
+    width: 15%;
+}
+
+.AdminEvalResult-teacher-questions {
+    clear: both;
+    padding: 5px;
+}
+

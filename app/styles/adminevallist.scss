@@ -16,8 +16,36 @@
     margin: 0 0 5px;
 }
 
-.AdminEvalList-item-date {
+.AdminEvalList-item-period {
     display: inline-block;
     width: 45%;
-    font-size: 0.9em;
+    font-size: 0.8em;
+}
+
+.AdminEvalList-item-period-date {
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+/* Responsive: larger phones */
+@media screen and (max-width: 767px) and (min-width: 480px) {
+    .AdminEvalList-item {
+        display: inline-block;
+        width: 48%;
+        margin-right: 2%;
+
+        &:nth-child(2n) {
+            margin-right: 0;
+        }
+    }
+}
+
+/* Responsive: phones  */
+@media screen and (max-width: 767px) {
+    /* limit list height on small screens */
+    .AdminEvalList {
+        max-height: 250px;
+        overflow-y: scroll;
+        overflow-scrolling: touch;
+    }
 }

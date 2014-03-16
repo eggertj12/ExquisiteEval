@@ -39,8 +39,12 @@ function MockBackend($q) {
     },
 
     getEvaluation: function(id) {
-      var deferred = $q.defer();
-      deferred.resolve({id: id});
+      var deferred = $q.defer(),
+        result = {
+          id: id,
+          Courses: ['foo']
+        };
+      deferred.resolve(result);
 
       return deferred.promise;
     },
