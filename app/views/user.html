@@ -10,7 +10,7 @@
 <div id="questions">
 	<div id="courseQuestions">
 		<h3>Course questions</h3>
-		<span ng-repeat="courseQuestion in courseQuestions">
+		<span ng-repeat="courseQuestion in evalInfo.courseQuestions">
 			<p ng-bind="courseQuestion.question.text"></p>
 			<span ng-if="courseQuestion.question.type == 'single'">
 				<span ng-repeat="question in courseQuestion.question.choices">
@@ -31,7 +31,7 @@
 	</div>
 	<div id="teacherQuestions">
 		<h3>Teacher questions</h3>
-		<span ng-repeat="teacher in teacherQuestions">
+		<span ng-repeat="teacher in evalInfo.teacherQuestions">
 			<h4 ng-bind="teacher.name"></h4>
 			<span ng-repeat="teacherQuestion in teacher.questions">
 				<p ng-bind="teacherQuestion.question.text"></p>
