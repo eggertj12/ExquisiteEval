@@ -83,18 +83,39 @@ function MockBackend($q) {
           Type: 'text'
         },
         {
-          "ID": 39,
-          "TextIS": "Course Question 3 - multiple",
-          "TextEN": "Course Question 3",
-          "ImageURL": "",
-          "Type": "multiple",
-          "Answers": [
+          ID: 38,
+          TextIS: 'Radiobutton question',
+          Type: 'single',
+          Answers: [
           {
-            "ID": 52,
-            "TextIS": "Svarmöguleiki 1",
-            "TextEN": "Answer1",
-            "ImageURL": "",
-            "Weight": 1
+            ID: 51,
+            TextIS: 'Svarmöguleiki 1',
+            Weight: 1
+          }]
+        },
+        {
+          ID: 39,
+          TextIS: 'Myndirðu vilja taka þennan áfanga aftur?',
+          ImageURL: '',
+          Type: 'multiple',
+          Answers: [
+          {
+            ID: 52,
+            TextIS: 'Svarmöguleiki 1',
+            ImageURL: '',
+            Weight: 1
+          },
+          {
+            ID: 53,
+            TextIS: 'Svarmöguleiki 2',
+            ImageURL: '',
+            Weight: 1
+          },
+          {
+            ID: 54,
+            TextIS: 'Svarmöguleiki 3',
+            ImageURL: '',
+            Weight: 3
           }]
         }],
         TeacherQuestions: [
@@ -103,6 +124,42 @@ function MockBackend($q) {
           TextIS: 'Hvernig var þessi kennari?',
           Type: 'text',
           Answers: []
+        },
+        {
+          ID: 41,
+          TextIS: 'Radiobutton question',
+          Type: 'single',
+          Answers: [
+          {
+            ID: 55,
+            TextIS: 'Svarmöguleiki 1',
+            Weight: 1
+          }]
+        },
+        {
+          ID: 42,
+          TextIS: 'Myndirðu vilja hafa þennan kennara aftur?',
+          ImageURL: '',
+          Type: 'multiple',
+          Answers: [
+          {
+            ID: 56,
+            TextIS: 'Svarmöguleiki 1',
+            ImageURL: '',
+            Weight: 1
+          },
+          {
+            ID: 57,
+            TextIS: 'Svarmöguleiki 2',
+            ImageURL: '',
+            Weight: 2
+          },
+          {
+            ID: 58,
+            TextIS: 'Svarmöguleiki 3',
+            ImageURL: '',
+            Weight: 3
+          }]
         }]
       });
 

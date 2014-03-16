@@ -29,7 +29,7 @@ describe('Controller: UserCtrl', function () {
     });
   }));
 
-  it('should initialize answers', function() {
+  it('getEval should generate various objects based on the eval requested', function() {
     // Just to fulfill 100% code coverage, should be in an e2e test
 
     scope.getEval('T-427-WEPO', '20141', 1);
@@ -38,11 +38,26 @@ describe('Controller: UserCtrl', function () {
     expect(scope.evalInfo.semester).toBe('20141');
     expect(scope.evalInfo.teachers.length).toBe(1);
     expect(scope.evalInfo.teachers[0].FullName).toBe('Daníel Brandur Sigurgeirsson');
-    expect(scope.evalInfo.courseQuestions.length).toBe(2);
+    expect(scope.evalInfo.courseQuestions.length).toBe(3);
     expect(scope.evalInfo.courseQuestions[0].question.text).toBe('Hvernig er áfangin?');
     expect(scope.evalInfo.teacherQuestions.length).toBe(1);
-    expect(scope.evalInfo.teacherQuestions[0].questions.length).toBe(1);
+    expect(scope.evalInfo.teacherQuestions[0].questions.length).toBe(3);
     expect(scope.evalInfo.teacherQuestions[0].questions[0].question.text).toBe('Hvernig var þessi kennari?');
+  });
+
+  it('submitEval should generate a legit answer object for the api', function() {
+    // Just to fulfill 100% code coverage, should be in an e2e test
+
+    scope.getEval('T-427-WEPO', '20141', 1);
+    scope.$apply();
+
+    // Simulate user input
+    scope.evalInfo.courseQuestions[2].answer.Value[52] = true;
+    scope.evalInfo.courseQuestions[2].answer.Value[53] = true;
+    scope.evalInfo.teacherQuestions[0].questions[2].answer.Value[57] = true;
+    scope.evalInfo.teacherQuestions[0].questions[2].answer.Value[58] = true;
+
+    scope.submitEval();
   });
 
 });

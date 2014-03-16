@@ -156,8 +156,10 @@ angular.module('exquisiteEvalApp')
               angular.forEach(answ.Value, function(check, id) {
                 // Is the checkbox checked
                 if(check) {
+                  console.log('checking');
                   // Add a comma after every concatenation, unless it's the start of the string
                   if(checkboxes.length > 0) {
+                    console.log('adding comma!');
                     checkboxes += ', ';
                   }
                   checkboxes += id;
