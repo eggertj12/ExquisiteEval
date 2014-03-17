@@ -1,32 +1,33 @@
 <div class="User">
 	<div class="row">
 		<div class="col-sm-3" class="col-xs-12">
-			<h2>User evaluations</h2>
-			<div id="evaluations">
-				<ul>
-					<li ng-repeat="eval in evaluations">
-						<a href="" ng-click="getEval(eval.CourseID, eval.Semester, eval.ID)" ng-bind="eval.CourseID"></a>
-					</li>
-				</ul>
+			<div class="User-evaluations">
+				<h2>User evaluations</h2>
+				<ul class="AdminEvalList">
+                    <li class="AdminEvalList-item User-evaluations-eval" ng-repeat="eval in evaluations" ng-click="getEval(eval.CourseID, eval.Semester, eval.ID)" ng-class="{Evalselected: eval.ID === evalInfo.ID && eval.CourseID == evalInfo.course}">
+                        <p class="User-evaluations-eval-title" ng-bind="eval.TemplateNameEN"></p>
+                        <p class="User-evaluations-eval-id" ng-bind="eval.CourseID"></p><br />
+                    </li>
+                </ul>
 			</div>
 		</div>
 		<div class="col-sm-9">
-			<div id="questions" ng-if="showEval">
-				<form class="form-horizontal" role="form">
-					<div id="courseInfo">
+			<div class="User-eval" ng-if="showEval">
+				<form class="form-horizontal" role="form" ng-submit="submitEval()">
+					<div class="User-eval-info">
 						<h3 ng-bind="evalInfo.titleIS"></h3>
 						<p ng-bind="evalInfo.introTextIS"></p>
 					</div>
-					<div id="courseQuestions">
+					<div class="User-eval-coursequestions">
 						<h3>Course questions</h3>
 						<span ng-repeat="courseQuestion in evalInfo.courseQuestions">
-							<strong ng-bind="courseQuestion.question.text"></strong>
+							<strong ng-bind="courseQuestion.question.textEN"></strong>
 							<span ng-if="courseQuestion.question.type == 'single'">
 								<span ng-repeat="question in courseQuestion.question.choices">
 									<div class="radio">
 										<label>
-											<input type="radio" id="optionsRadios1" name="{{courseQuestion.ID}}"  value="{{question.ID}}" ng-model="courseQuestion.answer.Value">
-											{{question.text}}
+											<input type="radio" id="optionsRadios1" name="{{courseQuestion.ID}}"  value="{{question.ID}}" ng-model="courseQuestion.answer.Value" required>
+											{{question.textEN}}
 										</label>
 									</div>
 								</span>
@@ -43,8 +44,8 @@
 								<span ng-repeat="question in courseQuestion.question.choices">
 									<div class="checkbox">
 										<label>
-											<input type="checkbox" value="{{question.ID}}" name="{{courseQuestion.ID}}" ng-model="courseQuestion.answer.Value[question.ID]">
-											{{question.text}}
+											<input type="checkbox" value="{{question.ID}}" name="{{courseQuestion.ID}}" ng-model="courseQuestion.answer.Value[question.ID]" >
+											{{question.textEN}}
 										</label>
 									</div>
 								</span>
@@ -52,7 +53,7 @@
 							</span>
 						</span>
 					</div>
-					<div id="teacherQuestions">
+					<div class="User-eval-teacherquestions">
 						<h3>Teacher questions</h3>
 						<span ng-repeat="teacher in evalInfo.teacherQuestions">
 							<!-- Teacher info -->
@@ -66,13 +67,13 @@
 							</p>
 							<br /> <br />
 							<span ng-repeat="teacherQuestion in teacher.questions">
-								<strong ng-bind="teacherQuestion.question.text"></strong>
+								<strong ng-bind="teacherQuestion.question.textEN"></strong>
 								<span ng-if="teacherQuestion.question.type == 'single'">
 									<span ng-repeat="question in teacherQuestion.question.choices">
 										<div class="radio">
 											<label>
-												<input type="radio" id="optionsRadios1" name="{{teacherQuestion.ID}}"  value="{{question.ID}}" ng-model="teacherQuestion.answer.Value">
-												{{question.text}}
+												<input type="radio" id="optionsRadios1" name="{{teacherQuestion.ID}}"  value="{{question.ID}}" ng-model="teacherQuestion.answer.Value" required>
+												{{question.textEN}}
 											</label>
 											<br />
 										</div>
@@ -90,7 +91,7 @@
 										<div class="checkbox">
 											<label>
 												<input type="checkbox" value="{{question.ID}}" name="{{courseQuestion.ID}}" ng-model="teacherQuestion.answer.Value[question.ID]">>
-												{{question.text}}
+												{{question.textEN}}
 											</label>
 											<br />
 										</div>
@@ -99,8 +100,8 @@
 							</span>
 						</span>
 					</div>
+				<button class="btn btn-default">Submit eval</button>
 				</form>
-				<button class="btn btn-default" ng-click="submitEval()">Submit eval</button>
 			</div>
 			<div ng-if="!showEval">
 				<h3 ng-bind="submitResult"></h3>
