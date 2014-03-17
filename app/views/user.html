@@ -1,57 +1,110 @@
-<h2>User evaluations</h2>
-
-<div id="evaluations">
-	<ul>
-		<li ng-repeat="eval in evaluations">
-			<a href="" ng-click="getEval(eval.CourseID, eval.Semester, eval.ID)" ng-bind="eval.CourseID"></a>
-		</li>
-	</ul>
-</div>
-<div id="questions">
-	<div id="courseQuestions">
-		<h3>Course questions</h3>
-		<span ng-repeat="courseQuestion in evalInfo.courseQuestions">
-			<p ng-bind="courseQuestion.question.text"></p>
-			<span ng-if="courseQuestion.question.type == 'single'">
-				<span ng-repeat="question in courseQuestion.question.choices">
-					<label ng-bind="question.text"></label>
-					<input type="radio" value="{{question.ID}}" ng-model="courseQuestion.answer.Value"> <br />
-				</span>
-			</span>
-			<span ng-if="courseQuestion.question.type == 'text'">
-				<input type="text" ng-model="courseQuestion.answer.Value"> <br />
-			</span>
-			<span ng-if="courseQuestion.question.type == 'multiple'">
-				<span ng-repeat="question in courseQuestion.question.choices">
-					<label ng-bind="question.text"></label>
-					<input type="checkbox" value="{{question.ID}}" ng-model="courseQuestion.answer.Value[question.ID]"> <br/>
-				</span>
-			</span>
-		</span>
+<div class="User">
+	<div class="row">
+		<div class="col-sm-3" class="col-xs-12">
+			<h2>User evaluations</h2>
+			<div id="evaluations">
+				<ul>
+					<li ng-repeat="eval in evaluations">
+						<a href="" ng-click="getEval(eval.CourseID, eval.Semester, eval.ID)" ng-bind="eval.CourseID"></a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-sm-9">
+			<div id="questions" ng-if="showEval">
+				<form class="form-horizontal" role="form">
+					<div id="courseInfo">
+						<h3 ng-bind="evalInfo.titleIS"></h3>
+						<p ng-bind="evalInfo.introTextIS"></p>
+					</div>
+					<div id="courseQuestions">
+						<h3>Course questions</h3>
+						<span ng-repeat="courseQuestion in evalInfo.courseQuestions">
+							<strong ng-bind="courseQuestion.question.text"></strong>
+							<span ng-if="courseQuestion.question.type == 'single'">
+								<span ng-repeat="question in courseQuestion.question.choices">
+									<div class="radio">
+										<label>
+											<input type="radio" id="optionsRadios1" name="{{courseQuestion.ID}}"  value="{{question.ID}}" ng-model="courseQuestion.answer.Value">
+											{{question.text}}
+										</label>
+									</div>
+								</span>
+								 <br />
+							</span>
+							<span ng-if="courseQuestion.question.type == 'text'">
+								<div class="form-group">
+									<div class="col-sm-8" class="col-xs-10">
+										<input class="form-control" type="text" ng-model="courseQuestion.answer.Value" name="{{question.ID}}"> <br />
+									</div>
+								</div>
+							</span>
+							<span ng-if="courseQuestion.question.type == 'multiple'">
+								<span ng-repeat="question in courseQuestion.question.choices">
+									<div class="checkbox">
+										<label>
+											<input type="checkbox" value="{{question.ID}}" name="{{courseQuestion.ID}}" ng-model="courseQuestion.answer.Value[question.ID]">
+											{{question.text}}
+										</label>
+									</div>
+								</span>
+								 <br />
+							</span>
+						</span>
+					</div>
+					<div id="teacherQuestions">
+						<h3>Teacher questions</h3>
+						<span ng-repeat="teacher in evalInfo.teacherQuestions">
+							<!-- Teacher info -->
+							<div class="AdminEvalResult-teacher-image" >
+								<img ng-src="{{teacher.img}}" class="img-thumbnail" />
+							</div>
+							<h1 ng-bind="teacher.name" class="AdminEvalResult-teacher-name" ></h1>
+							<p class="AdminEvalResult-teacher-details">
+								<span ng-bind="teacher.role" class="AdminEvalResult-teacher-details-role"></span>
+								<span ng-bind="teacher.ssn" class="AdminEvalResult-teacher-details-ssn"></span>
+							</p>
+							<br /> <br />
+							<span ng-repeat="teacherQuestion in teacher.questions">
+								<strong ng-bind="teacherQuestion.question.text"></strong>
+								<span ng-if="teacherQuestion.question.type == 'single'">
+									<span ng-repeat="question in teacherQuestion.question.choices">
+										<div class="radio">
+											<label>
+												<input type="radio" id="optionsRadios1" name="{{teacherQuestion.ID}}"  value="{{question.ID}}" ng-model="teacherQuestion.answer.Value">
+												{{question.text}}
+											</label>
+											<br />
+										</div>
+									</span>
+								</span>
+								<span ng-if="teacherQuestion.question.type == 'text'">
+									<div class="form-group">
+										<div class="col-sm-8" class="col-xs-10">
+											<input class="form-control" type="text" name="{{question.ID}}" ng-model="teacherQuestion.answer.Value"> <br />
+										</div>
+									</div>
+								</span>
+								<span ng-if="teacherQuestion.question.type == 'multiple'">
+									<span ng-repeat="question in teacherQuestion.question.choices">
+										<div class="checkbox">
+											<label>
+												<input type="checkbox" value="{{question.ID}}" name="{{courseQuestion.ID}}" ng-model="teacherQuestion.answer.Value[question.ID]">>
+												{{question.text}}
+											</label>
+											<br />
+										</div>
+									</span>
+								</span>
+							</span>
+						</span>
+					</div>
+				</form>
+				<button class="btn btn-default" ng-click="submitEval()">Submit eval</button>
+			</div>
+			<div ng-if="!showEval">
+				<h3 ng-bind="submitResult"></h3>
+			</div>
+		</div>
 	</div>
-	<div id="teacherQuestions">
-		<h3>Teacher questions</h3>
-		<span ng-repeat="teacher in evalInfo.teacherQuestions">
-			<h4 ng-bind="teacher.name"></h4>
-			<span ng-repeat="teacherQuestion in teacher.questions">
-				<p ng-bind="teacherQuestion.question.text"></p>
-				<span ng-if="teacherQuestion.question.type == 'single'">
-					<span ng-repeat="question in teacherQuestion.question.choices">
-						<label ng-bind="question.text"></label>
-						<input type="radio" value="{{question.ID}}" ng-model="teacherQuestion.answer.Value"> <br />
-					</span>
-				</span>
-				<span ng-if="teacherQuestion.question.type == 'text'">
-					<input type="text" ng-model="teacherQuestion.answer.Value"> <br />
-				</span>
-				<span ng-if="teacherQuestion.question.type == 'multiple'">
-					<span ng-repeat="question in teacherQuestion.question.choices">
-						<label ng-bind="question.text"></label>
-						<input type="checkbox" value="{{question.ID}}" ng-model="teacherQuestion.answer.Value[question.ID]"> <br/>
-					</span>
-				</span>
-			</span>
-		</span>
-	</div>
-	<button class="" ng-click="submitEval()">Submit eval</button>
 </div>

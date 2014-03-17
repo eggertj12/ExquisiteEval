@@ -1,16 +1,21 @@
 'use strict';
 
 angular.module('exquisiteEvalApp')
-  .controller('UserCtrl', ['$scope', '$location', 'EvalBackend',
-    function ($scope, $location, EvalBackend) {
+  .controller('UserCtrl', ['$scope', '$location', 'EvalBackend', 'EvalState',
+    function ($scope, $location, EvalBackend, EvalState) {
       // Holds the list of evaluations available
       $scope.evaluations = [];
+      $scope.showEval = false;
+      $scope.submitResult = '';
+      EvalState.PageTitle = 'Your open evaluations';
       
       // Contains various info about the eval selected
       $scope.evalInfo = {
         course: '',
         semester: '',
         ID: '',
+        titleIS: '',
+        introTextIS: '',
         courseQuestions: [],
         teacherQuestions: [],
         answers:[],
@@ -24,6 +29,7 @@ angular.module('exquisiteEvalApp')
 
       // User clicked on an evaluation
       $scope.getEval = function(course, semester, id) {
+        $scope.submitResult = '';
         // Get the list of teachers for this course
         EvalBackend.getCourseTeachers(course, semester).then(function(data) {
           $scope.evalInfo.teachers = data;
@@ -31,11 +37,14 @@ angular.module('exquisiteEvalApp')
 
         // Get the data for this evaluation
         EvalBackend.getCourseEvaluation(course, semester, id).then(function(data) {
+          $scope.showEval = true;
           // Reset the question arrays
           $scope.evalInfo.courseQuestions = [];
           $scope.evalInfo.teacherQuestions = [];
           $scope.evalInfo.course = course;
           $scope.evalInfo.semester = semester;
+          $scope.evalInfo.introTextIS = data.IntoTextIS;
+          $scope.evalInfo.titleIS = data.TitleIS;
           $scope.evalInfo.ID = id;
 
           angular.forEach(data.CourseQuestions, function(quest) {
@@ -43,6 +52,7 @@ angular.module('exquisiteEvalApp')
                and another object containing the answers for the question - on the format the API expects */
             var thisQuestion = {
               question: {
+                ID: quest.ID,
                 text: quest.TextIS,
                 type: quest.Type,
                 img: quest.ImageURL
@@ -86,7 +96,7 @@ angular.module('exquisiteEvalApp')
             var thisTeacher = {
               name: teacher.FullName,
               ssn: teacher.SSN,
-              img: teacher.ImageUrl,
+              img: teacher.ImageURL,
               role: teacher.Role,
               email: teacher.Email,
               username: teacher.Username,
@@ -96,6 +106,7 @@ angular.module('exquisiteEvalApp')
             angular.forEach(data.TeacherQuestions, function(quest) {
               var thisQuestion = {
                 question: {
+                  ID: quest.ID,
                   text: quest.TextIS,
                   type: quest.Type,
                   img: quest.ImageURL
@@ -156,10 +167,8 @@ angular.module('exquisiteEvalApp')
               angular.forEach(answ.Value, function(check, id) {
                 // Is the checkbox checked
                 if(check) {
-                  console.log('checking');
                   // Add a comma after every concatenation, unless it's the start of the string
                   if(checkboxes.length > 0) {
-                    console.log('adding comma!');
                     checkboxes += ', ';
                   }
                   checkboxes += id;
@@ -197,8 +206,14 @@ angular.module('exquisiteEvalApp')
             });
           });
           console.log($scope.evalInfo.answers);
-          EvalBackend.addCourseEvaluation($scope.evalInfo.course, $scope.evalInfo.semester, $scope.evalInfo.ID, $scope.evalInfo.answers).then(function(data) {
-
+          EvalBackend.addCourseEvaluation($scope.evalInfo.course, $scope.evalInfo.semester, $scope.evalInfo.ID, $scope.evalInfo.answers).then(function() {
+            $scope.submitResult = 'Evaluation successfully submitted! Thanks!';
+            $scope.showEval = false;
+            // Refresh the list of evals
+            $scope.evaluations = [];
+            EvalBackend.getMyEvaluations().then(function(evals) {
+              $scope.evaluations = evals;
+            });
           });
         };
     }]);
