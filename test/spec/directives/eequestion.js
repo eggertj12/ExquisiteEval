@@ -45,28 +45,84 @@ describe('Directive: eeQuestion', function () {
   });
 
   describe('when created', function () {
-    // it('should throw error when ngModel attribute not defined', function () {
-    //   function invalidTemplate() {
-    //     createDirective({foo: 'bar'}, '<ee-admin-eval-result></ee-admin-eval-result>');
-    //   }
-
-    //   // Couldn't get error mathcing to work, just general exception
-    //   // expect(invalidTemplate).toThrow(new Error("[$compile:ctreq] Controller 'ngModel', required by directive 'kkEditor', can't be found!"));
-    //   expect(invalidTemplate).toThrow();
-    // });
-
-    it('should render the expected output', function () {
-
+    it('should render the question text to header', function () {
+      // Arrange
       element = createDirective();
+
+      // Act
 
       // fire all the watches, so the scope binding will be evaluated
       $rootScope.$digest();
 
-      // element is a jqLite object, find searches only by tagname
-      // if full jQuery is needed it probably can be loaded by Karma.
-      return expect(element.find('h1').text()).toBe('testing');
+      // Assert
+
+      expect(element.find('h1').text()).toBe('testing');
     });
 
+    it('should remove text answer list for options question', function () {
+      // Arrange
+      var question = {
+        Type: 'single',
+        OptionsResults: [
+          {AnswerTextEN: 'Halló'},
+          {AnswerTextEN: 'heimur'}
+        ]
+      };
+
+      element = createDirective(question);
+
+      // Act
+
+      // fire all the watches, so the scope binding will be evaluated
+      $rootScope.$digest();
+
+      // Assert
+
+      // Properly removed items
+      expect(element.find('.Question-graph').length).toBe(1);
+      expect(element.find('.Question-textlist').length).toBe(0);
+
+      // And added answers
+      expect(element.find('.Question-graph-option-text').length).toBe(2);
+      expect(element.find('.Question-graph-option-text')[0].innerHTML).toBe('Halló');
+    });
+
+    it('should remove graph element for text question', function () {
+      // Arrange
+      var question = {
+        Type: 'text'
+      };
+
+      element = createDirective(question);
+
+      // Act
+
+      // fire all the watches, so the scope binding will be evaluated
+      $rootScope.$digest();
+
+      // Assert
+
+      expect(element.find('.Question-graph').length).toBe(0);
+      expect(element.find('.Question-textlist').length).toBe(1);
+    });
+
+    it('toggleClose() should toggle closed attribute :)', function () {
+      // Arrange
+      var scope,
+        question = {
+          Type: 'text',
+          closed: true
+        };
+
+      element = createDirective(question);
+      scope = element.isolateScope();
+
+      // Act
+      scope.toggleClosed();
+
+      // Assert
+      expect(question.closed).toBe(false);
+    });
 
   });
 
