@@ -18,10 +18,10 @@
 						<h3 ng-bind="evalInfo.titleIS"></h3>
 						<p ng-bind="evalInfo.introTextIS"></p>
 					</div>
-					<div class="User-eval-coursequestions">
+					<div class="User-eval-coursequestions" ng-if="evalInfo.courseQuestions.length > 0">
 						<h3>Course questions</h3>
 						<span ng-repeat="courseQuestion in evalInfo.courseQuestions">
-							<strong ng-bind="courseQuestion.question.textEN"></strong>
+							<strong ng-bind="courseQuestion.question.textEN"></strong><br />
 							<span ng-if="courseQuestion.question.type == 'single'">
 								<span ng-repeat="question in courseQuestion.question.choices">
 									<div class="radio">
@@ -29,9 +29,11 @@
 											<input type="radio" id="optionsRadios1" name="{{courseQuestion.ID}}"  value="{{question.ID}}" ng-model="courseQuestion.answer.Value" required>
 											{{question.textEN}}
 										</label>
+										<span ng-if="question.weight == 5" class="glyphicon glyphicon-thumbs-up User-evaluation-green"></span>
+										<span ng-if="question.weight == 1" class="glyphicon glyphicon-thumbs-down User-evaluation-red"></span>
 									</div>
 								</span>
-								 <br />
+								<br />
 							</span>
 							<span ng-if="courseQuestion.question.type == 'text'">
 								<div class="form-group">
@@ -47,13 +49,15 @@
 											<input type="checkbox" value="{{question.ID}}" name="{{courseQuestion.ID}}" ng-model="courseQuestion.answer.Value[question.ID]" >
 											{{question.textEN}}
 										</label>
+										<span ng-if="question.weight == 5" class="glyphicon glyphicon-thumbs-up User-evaluation-green"></span>
+										<span ng-if="question.weight == 1" class="glyphicon glyphicon-thumbs-down User-evaluation-red"></span>
 									</div>
 								</span>
-								 <br />
+								<br />
 							</span>
 						</span>
 					</div>
-					<div class="User-eval-teacherquestions">
+					<div class="User-eval-teacherquestions" ng-if="evalInfo.teacherQuestions.length > 0 && evalInfo.teacherQuestions[0].questions.length > 0">
 						<h3>Teacher questions</h3>
 						<span ng-repeat="teacher in evalInfo.teacherQuestions">
 							<!-- Teacher info -->
@@ -65,7 +69,7 @@
 								<span ng-bind="teacher.role" class="AdminEvalResult-teacher-details-role"></span>
 								<span ng-bind="teacher.ssn" class="AdminEvalResult-teacher-details-ssn"></span>
 							</p>
-							<br /> <br />
+							<br />
 							<span ng-repeat="teacherQuestion in teacher.questions">
 								<strong ng-bind="teacherQuestion.question.textEN"></strong>
 								<span ng-if="teacherQuestion.question.type == 'single'">
@@ -75,9 +79,11 @@
 												<input type="radio" id="optionsRadios1" name="{{teacherQuestion.ID}}"  value="{{question.ID}}" ng-model="teacherQuestion.answer.Value" required>
 												{{question.textEN}}
 											</label>
-											<br />
+											<span ng-if="question.weight == 5" class="glyphicon glyphicon-thumbs-up User-evaluation-green"></span>
+											<span ng-if="question.weight == 1" class="glyphicon glyphicon-thumbs-down User-evaluation-red"></span>
 										</div>
 									</span>
+									<br />
 								</span>
 								<span ng-if="teacherQuestion.question.type == 'text'">
 									<div class="form-group">
@@ -93,9 +99,11 @@
 												<input type="checkbox" value="{{question.ID}}" name="{{courseQuestion.ID}}" ng-model="teacherQuestion.answer.Value[question.ID]">>
 												{{question.textEN}}
 											</label>
-											<br />
+											<span ng-if="question.weight == 5" class="glyphicon glyphicon-thumbs-up User-evaluation-green"></span>
+											<span ng-if="question.weight == 1" class="glyphicon glyphicon-thumbs-down User-evaluation-red"></span>
 										</div>
 									</span>
+								<br />
 								</span>
 							</span>
 						</span>
