@@ -9,6 +9,7 @@ describe('Controller: TemplateCtrl', function () {
     $location,
     EvalBackend,
     $provide,
+    EvalState,
     scope;
 
   // get a reference to provide service, can not be done from inject function
@@ -30,6 +31,12 @@ describe('Controller: TemplateCtrl', function () {
     });
 
   }));
+
+  it('createNewTemplate should call two tested functions', function () {
+    scope.createNewTemplate();
+    scope.apply();
+    expect(scope.template.TitleIS).toBe('');
+  });
 
   it('cleanTemplate should leave the template blank', function() {
     scope.cleanTemplate();
