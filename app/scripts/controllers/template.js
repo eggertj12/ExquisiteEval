@@ -240,6 +240,7 @@ angular.module('exquisiteEvalApp')
         EvalBackend.addTemplate($scope.template).then(function(data) {
           console.log(data);
           $scope.vm.edit = false;
+          $scope.showTemplates();
         });
       };
 
