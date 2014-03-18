@@ -7,7 +7,6 @@ angular.module('exquisiteEvalApp')
       $scope.evaluations = [];
       $scope.showEval = false;
       $scope.submitResult = '';
-      $scope.ID = '';
       EvalState.PageTitle = 'Your open evaluations';
       
       // Contains various info about the eval selected
@@ -32,7 +31,6 @@ angular.module('exquisiteEvalApp')
 
       // User clicked on an evaluation
       $scope.getEval = function(course, semester, id) {
-        $scope.ID = id;
         $scope.submitResult = '';
         // Get the list of teachers for this course
         EvalBackend.getCourseTeachers(course, semester).then(function(data) {
@@ -165,13 +163,12 @@ angular.module('exquisiteEvalApp')
           angular.forEach($scope.evalInfo.courseQuestions, function(quest) {
             // Get the answer object for this question
             var answ = quest.answer;
-            // Since our answers for the multiple choice answers aren't on the format the API expects, we convert them to the right format
+            // Since our multiple choice questions aren't on the right format as the API expects we convert it
             if(quest.question.type === 'multiple') {
-              // For every choice, we concatenate to our string, as long it's been checked 
+              // For every choice for the question
               angular.forEach(answ.Value, function(check, id) {
-                // Is the checkbox checked
+                // We create a new object answer for that choice
                 if(check) {
-                  // Add a comma after every concatenation, unless it's the start of the string
                   var thisAnsw = angular.copy(answ);
                   thisAnsw.Value = id;
                   $scope.evalInfo.answers.push(thisAnsw);
@@ -188,13 +185,12 @@ angular.module('exquisiteEvalApp')
             angular.forEach(teacher.questions, function(quest) {
               // Get the answer object for this question
               var answ = quest.answer;
-              // Since our answers for the multiple choice answers aren't on the format the API expects, we convert them to the right format
+              // Since our multiple choice questions aren't on the right format as the API expects we convert it
               if(quest.question.type === 'multiple') {
-                // For every choice, we concatenate to our string, as long it's been checked 
+                // For every choice for the question
                 angular.forEach(answ.Value, function(check, id) {
-                  // Is the checkbox checked
+                  // We create a new object answer for that choice
                   if(check) {
-                    // Add a comma after every concatenation, unless it's the start of the string
                     var thisAnsw = angular.copy(answ);
                     thisAnsw.Value = id;
                     $scope.evalInfo.answers.push(thisAnsw);
@@ -207,9 +203,11 @@ angular.module('exquisiteEvalApp')
             });
           });
           EvalBackend.addCourseEvaluation($scope.evalInfo.course, $scope.evalInfo.semester, $scope.evalInfo.ID, $scope.evalInfo.answers).then(function(status) {
+            // Display a message saying the eval was submitted
             $scope.submitResult = 'Evaluation successfully submitted! Thanks!';
             $scope.showEval = false;
-            $scope.ID = '';
+            $scope.evalInfo.ID = '';
+
             // Refresh the list of evals
             $scope.evaluations = [];
             EvalBackend.getMyEvaluations().then(function(evals) {
