@@ -47,7 +47,7 @@ angular.module('exquisiteEvalApp')
         };
 
         // Add a property for toggling size
-        scope.question.closed = true;
+        scope.question.closed = false;
 
         // Handle question depending on type
         if (scope.question.Type === 'text') {

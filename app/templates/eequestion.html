@@ -1,6 +1,7 @@
 <article class="Question">
     <header class="Question-header" ng-click="toggleClosed()" >
-        <h1 class="Question-header-text" ng-bind="question.TextEN"></h1>
+        <h1 class="Question-header-text" ng-bind="question.TextEN"
+            ng-class="{'Util-expandable--open': !question.closed, 'Util-expandable--closed': question.closed}"></h1>
         <span class="Question-header-type" ng-bind="question.Type"></span>
     </header>
 

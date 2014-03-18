@@ -1,0 +1,12 @@
+// Not sure about naming conventions here. Should be using .state instead of --modifier ??
+
+.Util-expandable--open:before {
+    content: '- ';
+    font-weight: bold;
+}
+
+.Util-expandable--closed:before {
+    content: '+ ';
+    font-weight: bold;
+}
+

@@ -1,5 +1,3 @@
-Depends on npm, grunt, karma, compass and istanbul being installed on system.
-
 ExquisiteEval
 =============
 
@@ -21,7 +19,7 @@ $ npm install
 $ bower install
 ```
 
-## Backend API
+### Backend API
 
 ExquisiteEval depends on a backend API currently located at http://dispatch.ru.is/h08/api/v1/
 
@@ -37,7 +35,7 @@ $ grunt dist
 
 Which concatenates and minifies all files to `dist` directory which can then be copied to a webserver, or run locally f.ex. via `python -m SimpleHTTPServer` if `python 2.7.x` is installed on local machine.
 
-## Building
+## Developing
 
 Development build of package can be built and continuously run via `grunt serve` task which then watches for changes and livereloads browser window.
 
@@ -47,8 +45,8 @@ Continuous testing can also be done with `karma start` command which will monito
 
 Should be pretty self explanatory. 
 - Login at first screen with valid top security credentials
-- Student userw will on the other hand get a list of open evaluations to fill out and post their results
-- Admin user will be taken to evaluations page with options for viewing results and adding evaluations
+- Student users will be taken to a list of open evaluations to fill out and post their results
+- Admin user will on the other hand get an evaluations page with options for viewing results and adding evaluations
 - Creation of evaluation templates is a straight forward process of filling out available fields based on excellent UI hints
 - New evaluations can be set up based on templates which are available
 - Results of questions will be displayed depending on types of questions and all sections are collapsible for better overview

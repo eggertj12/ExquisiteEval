@@ -68,10 +68,13 @@
                 <div class="col-xs-12">
                     <div class="row">
                         <div class="col-xs-12">
-                            <h4 class="AdminEvalResult-heading AdminEvalResult-heading--clickable" ng-click="openTeacher(vm.course)">Course questions</h4>
+                            <h4 class="AdminEvalResult-heading AdminEvalResult-heading--clickable"
+                                ng-click="openTeacher(vm.course)"
+                                ng-class="{'Util-expandable--open': !vm.course.open, 'Util-expandable--closed': vm.course.open}">
+                                Course questions</h4>
                         </div>
                     </div>
-                    <div class="row" collapse="!vm.course.open">
+                    <div class="row" collapse="vm.course.open">
                         <div class="col-xs-12">
                             <div class="AdminEvalResult-question" ng-repeat="question in vm.course.Questions | filter:{ 'TeacherSSN': null} ">
                                 <article ee-question ng-model="question"></article>
@@ -91,7 +94,9 @@
                         <div class="AdminEvalResult-teacher-image" ng-click="openTeacher(teacher)" >
                             <img ng-src="{{teacher.ImageURL}}" class="img-thumbnail" />
                         </div>
-                        <h1 ng-bind="teacher.FullName" class="AdminEvalResult-teacher-name" ng-click="openTeacher(teacher)" ></h1>
+                        <h1 ng-bind="teacher.FullName" class="AdminEvalResult-teacher-name" ng-click="openTeacher(teacher)" 
+                            ng-class="{'Util-expandable--open': teacher.open, 'Util-expandable--closed': !teacher.open}"></h1>
+
                         <p class="AdminEvalResult-teacher-details">
                             <span ng-bind="teacher.Role" class="AdminEvalResult-teacher-details-role"></span>
                             <span ng-bind="teacher.SSN" class="AdminEvalResult-teacher-details-ssn"></span>
