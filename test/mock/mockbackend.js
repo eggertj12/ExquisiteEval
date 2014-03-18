@@ -10,7 +10,7 @@ function MockBackend($q) {
       return deferred.promise;
     },
 
-    addTemplate: function() {
+    addTemplate: function(template) {
       var deferred = $q.defer();
       deferred.resolve('ok');
 
@@ -19,14 +19,20 @@ function MockBackend($q) {
 
     getTemplate: function(id) {
       var deferred = $q.defer();
-      deferred.resolve({id: id});
+      deferred.resolve({
+        ID: id,
+        TextIS: 'Jahérnahér',
+        TextEN: 'What up! mah',
+        IntroTextIS: 'Hvað er að gerast hérna?',
+        IntroTextEN: 'yo yo yo yo yo'
+      });
 
       return deferred.promise;
     },
 
     getEvaluations: function() {
       var deferred = $q.defer();
-      deferred.resolve([{id:1}]);
+      deferred.resolve([{ID:1}]);
 
       return deferred.promise;
     },
