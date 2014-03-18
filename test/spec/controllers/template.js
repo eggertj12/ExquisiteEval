@@ -6,6 +6,7 @@ describe('Controller: TemplateCtrl', function () {
   beforeEach(module('exquisiteEvalApp'));
 
   var TemplateCtrl,
+  $injector,
     $location,
     EvalBackend,
     $provide,
@@ -19,8 +20,10 @@ describe('Controller: TemplateCtrl', function () {
 
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, $injector) {
+  beforeEach(inject(function ($controller, $rootScope, _$injector_) {
     scope = $rootScope.$new();
+
+    $injector  = _$injector_;
     $location = $injector.get('$location');
 
     $provide.service('EvalBackend', MockBackend);
@@ -97,12 +100,10 @@ describe('Controller: TemplateCtrl', function () {
   });
 
   it('editTemplate should set some booleans', function() {
+    scope.vm.edit = false;
     scope.editTemplate();
-    scope.$apply();
 
     expect(scope.vm.edit).toBe(true);
-    expect(scope.vm.displayTlist).toBe(false);
-    expect(scope.vm.displayT).toBe(false);
   });
 
   it('editSpecificTemplate should talk with the Backend and set some booleans', function() {
@@ -248,7 +249,6 @@ describe('Controller: TemplateCtrl', function () {
     scope.question.TextIS = 'Drullumall';
 
     scope.addQuestion();
-    scope.$apply();
 
     expect(scope.template.CourseQuestions[0].TextIS).toBe('Drullumall');
 
@@ -261,7 +261,6 @@ describe('Controller: TemplateCtrl', function () {
     scope.question.TextEN = 'hangon';
 
     scope.addQuestion();
-    scope.$apply();
 
     expect(scope.template.TeacherQuestions[0].TextEN).toBe('hangon');
   });

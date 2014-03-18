@@ -5,9 +5,11 @@
             <div class="form-group">
                 <button ng-click="createNewTemplate()" class="btn btn-default">Create a new template</button>
             </div>
-            <a ng-repeat="template in vm.templates" ng-click="displaySpecificTemplate(template.ID)">
-                <p>{{template.TitleIS}}, {{template.TitleEN}}</p>
+            <a class="Template-list-item-title" ng-repeat="template in vm.templates" ng-click="displaySpecificTemplate(template.ID)">
+                {{template.TitleIS}}, {{template.TitleEN}}
+                <br/>
             </a>
+            
         </div>
         <div class="col-sm-9 template-display" ng-if="vm.displayT">
             <h3>Review template</h3>
