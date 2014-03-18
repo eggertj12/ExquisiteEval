@@ -70,24 +70,6 @@ describe('Controller: TemplateCtrl', function () {
     expect(scope.answer.ID).toBe(0);
   });
 
-
-  if('addAnswer should add the answer to the answer holder', function() {
-    scope.answer.ID = 3;
-    scope.answer.TextIS = 'Hvað?';
-    scope.answer.TextEN = 'Watz?';
-    scope.answer.ImageURL = '';
-    scope.answer.Weight = 2;
-
-    scope.addAnswer();
-    scope.$apply();
-
-    expect(scope.question.Answers[0].ID).toBe(3);
-    expect(scope.question.Answers[0].TextIS).toBe('Hvað?');
-    expect(scope.question.Answers[0].TextEN).toBe('Watz?');
-    expect(scope.question.Answers[0].ImageURL).toBe('');
-    expect(scope.question.Answers[0].Weight).toBe(2);
-  });
-
   it('showTemplates should get an array of templates from the backend and change some booleans', function() {
     scope.showTemplates();
     scope.$apply();
