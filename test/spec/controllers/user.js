@@ -70,7 +70,6 @@ describe('Controller: UserCtrl', function () {
     expect(scope.evalInfo.answers[7].QuestionID).toBe(42);
     expect(scope.submitResult).toBe('Evaluation successfully submitted! Thanks!');
     expect(scope.showEval).toBe(false);
-    expect(scope.ID).toBe('');
   });
 
 });
