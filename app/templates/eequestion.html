@@ -6,7 +6,7 @@
     </header>
 
     <ul class="Question-textlist" ng-class="{'Question-textlist--closed': question.closed}">
-        <li class="Question-textlist-item" ng-repeat="res in question.TextResults" ng-bind="res"></li>
+        <li class="Question-textlist-item" ng-repeat="res in question.TextResults | filter:empty" ng-bind="res"></li>
     </ul>
 
     <div class="Question-graph">

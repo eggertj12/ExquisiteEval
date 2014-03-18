@@ -125,6 +125,38 @@ describe('Directive: eeQuestion', function () {
       expect(question.closed).toBe(true);
     });
 
+    it('filter() should return false for empty string', function () {
+      // Arrange
+      var scope,
+        result;
+
+      element = createDirective();
+      scope = element.isolateScope();
+
+      // Act
+      result = scope.empty('');
+
+      // Assert
+      // eequestion will always initialize closed to false so should be true after toggleClosed
+      expect(result).toBe(false);
+    });
+
+    it('filter() should return true for non-empty string', function () {
+      // Arrange
+      var scope,
+        result;
+
+      element = createDirective();
+      scope = element.isolateScope();
+
+      // Act
+      result = scope.empty('smuuuu');
+
+      // Assert
+      // eequestion will always initialize closed to false so should be true after toggleClosed
+      expect(result).toBe(true);
+    });
+
   });
 
 });

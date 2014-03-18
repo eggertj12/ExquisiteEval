@@ -46,6 +46,14 @@ angular.module('exquisiteEvalApp')
           scope.question.closed = !scope.question.closed;
         };
 
+        scope.empty = function(val) {
+          if (val) {
+            return true;
+          } else {
+            return false;
+          }
+        };
+
         // Add a property for toggling size
         scope.question.closed = false;
 
