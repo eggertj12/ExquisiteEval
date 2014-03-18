@@ -2,7 +2,9 @@
     <div class="row">
         <div class="col-sm-3 templatelist-display">
             <h3>Templates</h3>
-            <button  ng-click="createNewTemplate()" class="btn btn-default">Create a new template</button>
+            <div class="form-group">
+                <button ng-click="createNewTemplate()" class="btn btn-default">Create a new template</button>
+            </div>
             <a ng-repeat="template in vm.templates" ng-click="displaySpecificTemplate(template.ID)">
                 <p>{{template.TitleIS}}, {{template.TitleEN}}</p>
             </a>
@@ -17,16 +19,16 @@
                 <h6>{{template.IntroTextEN}}</h6>
             </div>
             <div class="questions">
-                <p>Course questions:</p>
-                <p ng-repeat="question in template.CourseQuestions track by $index">
-                    <p>{{question.TextIS}}, {{question.TextEN}}</p>
-                    <p>{{question.Type}}</p>
-                </p>
-                <p>Teacher questions:</p>
-                <p ng-repeat="question in template.TeacherQuestions track by $index">
-                    <p>{{question.TextIS}}, {{question.TextEN}}</p>
-                    <p>{{question.Type}}</p>
-                </p>
+                <h4>Course questions:</h4>
+                <div ng-repeat="question in template.CourseQuestions track by $index">
+                    <span>Type: {{question.Type}}</span>
+                    <span>, Text: {{question.TextIS}}, {{question.TextEN}}</span>
+                </div>
+                <h4>Teacher questions:</h4>
+                <div ng-repeat="question in template.TeacherQuestions track by $index">
+                    <span>Type: {{question.Type}}</span>
+                    <span>, Text: {{question.TextIS}}, {{question.TextEN}}</span>
+                </div>
             </div>
             <button class="btn btn-default " ng-click="editSpecificTemplate(template.ID)">Use this template as a baseline for making new template</button>
             <button class="btn btn-default " ng-click="makeEvalFromThisTemplate(template.ID)">Make an evaluation from this template</button>
@@ -62,6 +64,7 @@
                         </form>
                     </div>
                     <div class="questions">
+                        <h4>Course questions:</h4>
                         <p ng-repeat="question in template.CourseQuestions track by $index">
                             Icelandic text: {{question.TextIS}}
                             <br/> 
@@ -70,6 +73,7 @@
                             Type: {{question.Type}}.
                             <button class="btn btn-default " ng-click="removeCourseQuestion($index)">Remove Question</button>
                         </p>
+                        <h4>Teacher questions:</h4>
                         <p ng-repeat="question in template.TeacherQuestions track by $index">
                             Icelandic text: {{question.TextIS}}
                             <br/>
