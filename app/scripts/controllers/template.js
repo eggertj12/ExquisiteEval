@@ -1,8 +1,9 @@
 'use strict';
 
 angular.module('exquisiteEvalApp')
-  .controller('TemplateCtrl', ['$scope', '$location', 'EvalBackend', 'EvalState', function ($scope, $location, EvalBackend, EvalState) {
-
+  .controller('TemplateCtrl', ['$scope', '$location', 'EvalBackend', 'EvalState',
+  function ($scope, $location, EvalBackend, EvalState) {
+    EvalState.PageTitle = 'Manage templates';
 
     $scope.template = {
         ID: 0,
@@ -246,5 +247,8 @@ angular.module('exquisiteEvalApp')
       EvalState.TemplateID = id;
       $location.url('/evaluation');
     };
+
+    // Display templates by default
+    $scope.showTemplates();
 
   }]);

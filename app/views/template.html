@@ -1,135 +1,207 @@
 <div class="Template">
-    <button class="placeholder" ng-click="showTemplates()">Templates:</button>
-    <div class="templatelist-display" ng-if="vm.displayTlist">
-        <a ng-click="createNewTemplate()">
-            <p>Create a new template</p>
-        <a ng-repeat="template in vm.templates" ng-click="displaySpecificTemplate(template.ID)">
-            <p>{{template.TitleIS}}, {{template.TitleEN}}</p>
-        </a>
-    </div>
-    <div class="template-display" ng-if="vm.displayT">
-        <div class="titles">
-            <p>Title:</p>
-            <h3>{{template.TitleIS}}, {{template.TitleEN}}</h3>
-            <p>Intro:</p>
-            <h6>{{template.IntroTextIS}}</h6>
-            <h6>{{template.IntroTextEN}}</h6>
+    <div class="row">
+        <div class="col-sm-3 templatelist-display">
+            <h3>Templates</h3>
+            <button  ng-click="createNewTemplate()" class="btn btn-default">Create a new template</button>
+            <a ng-repeat="template in vm.templates" ng-click="displaySpecificTemplate(template.ID)">
+                <p>{{template.TitleIS}}, {{template.TitleEN}}</p>
+            </a>
         </div>
-        <div class="questions">
-            <p>Course questions:</p>
-            <p ng-repeat="question in template.CourseQuestions track by $index">
-                <p>{{question.TextIS}}, {{question.TextEN}}</p>
-                <p>{{question.Type}}</p>
-            </p>
-            <p>Teacher questions:</p>
-            <p ng-repeat="question in template.TeacherQuestions track by $index">
-                <p>{{question.TextIS}}, {{question.TextEN}}</p>
-                <p>{{question.Type}}</p>
-            </p>
-        </div>
-        <button class="" ng-click="editSpecificTemplate(template.ID)">Use this template as a baseline for making new template</button>
-        <button class="" ng-click="makeEvalFromThisTemplate(template.ID)">Make an evaluation from this template</button>
-    </div>
-    <div class="template-maker" ng-if="vm.edit">
-        <div class="row left">
+        <div class="col-sm-9 template-display" ng-if="vm.displayT">
+            <h3>Review template</h3>
             <div class="titles">
                 <p>Title:</p>
-                <input placeholder="{{template.TitleIS}}" data-ng-model="template.TitleIS"/>
-                <input placeholder="{{template.TitleEN}}" data-ng-model="template.TitleEN"/>
+                <h3>{{template.TitleIS}}, {{template.TitleEN}}</h3>
                 <p>Intro:</p>
-                <input placeholder="{{template.IntroTextIS}}" data-ng-model="template.IntroTextIS"/>
-                <input placeholder="{{template.IntroTextEN}}" data-ng-model="template.IntroTextEN"/>
+                <h6>{{template.IntroTextIS}}</h6>
+                <h6>{{template.IntroTextEN}}</h6>
             </div>
             <div class="questions">
+                <p>Course questions:</p>
                 <p ng-repeat="question in template.CourseQuestions track by $index">
-                    Icelandic text: {{question.TextIS}}
-                    <br/> 
-                    English text: {{question.TextEN}}
-                    <br/>
-                    Type: {{question.Type}}.
-                    <button class="" ng-click="removeCourseQuestion($index)">Remove Question</button>
+                    <p>{{question.TextIS}}, {{question.TextEN}}</p>
+                    <p>{{question.Type}}</p>
                 </p>
+                <p>Teacher questions:</p>
                 <p ng-repeat="question in template.TeacherQuestions track by $index">
-                    Icelandic text: {{question.TextIS}}
-                    <br/>
-                    English text: {{question.TextIS}}
-                    <br/>
-                    Type: {{question.Type}}
-                    <button class="" ng-click="removeTeacherQuestion($index)">Remove Question</button>
+                    <p>{{question.TextIS}}, {{question.TextEN}}</p>
+                    <p>{{question.Type}}</p>
                 </p>
-                <a class="add-question" ng-click="addingQuestion()">Add question</a>
             </div>
-            <div class="row right">
-                <div class ="add-question" ng-if="vm.displayQ">
-                    <div class="radio-buttons course-teacher-question">
-                        <p>Teacher Question:
-                            <input type="radio" data-ng-model="qhandle.teacherOrCourseQ" value="teacher"/>
+            <button class="btn btn-default " ng-click="editSpecificTemplate(template.ID)">Use this template as a baseline for making new template</button>
+            <button class="btn btn-default " ng-click="makeEvalFromThisTemplate(template.ID)">Make an evaluation from this template</button>
+        </div>
+        <div class="col-sm-9 template-maker" ng-if="vm.edit">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3>Add template</h3>
+                    <div class="titles">
+                        <label>Title:</label>
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    <input class="form-control" placeholder="Icelandic" data-ng-model="template.TitleIS"/>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input class="form-control" placeholder="English" data-ng-model="template.TitleEN"/>
+                                </div>
+                            </div>
+                        </form>
+                        <label>Intro:</label>
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <input class="form-control" placeholder="Icelandic" data-ng-model="template.IntroTextIS"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <input class="form-control" placeholder="English" data-ng-model="template.IntroTextEN"/>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="questions">
+                        <p ng-repeat="question in template.CourseQuestions track by $index">
+                            Icelandic text: {{question.TextIS}}
+                            <br/> 
+                            English text: {{question.TextEN}}
+                            <br/>
+                            Type: {{question.Type}}.
+                            <button class="btn btn-default " ng-click="removeCourseQuestion($index)">Remove Question</button>
                         </p>
-                        <p>Course Question:
-                            <input type="radio" data-ng-model="qhandle.teacherOrCourseQ" value="course"/>
+                        <p ng-repeat="question in template.TeacherQuestions track by $index">
+                            Icelandic text: {{question.TextIS}}
+                            <br/>
+                            English text: {{question.TextIS}}
+                            <br/>
+                            Type: {{question.Type}}
+                            <button class="btn btn-default " ng-click="removeTeacherQuestion($index)">Remove Question</button>
+                        </p>
+                        <p>
+                            <a class="btn btn-primary" ng-click="addingQuestion()">Add question</a>
+                            <button class="btn btn-default " ng-click="abortEdit()">Abort edit</button>
+                            <button class="btn btn-default " ng-click="postTemplate()">Post</button>
                         </p>
                     </div>
-                    <div class="question-text">
-                        <p>Question Text:
-                            <input placeholder="Icelandic" data-ng-model="question.TextIS"/>
-                            <input placeholder="English" data-ng-model="question.TextEN"/>
-                        </p>
-                    </div>
-                    <div class="image-url">
-                        <input placeholder="URL for image" data-ng-model="question.ImageURL"/>
-                    </div>
-                    <div class="radio-buttons answers">
-                        <h4>Select question type:</h4>
-                        <p>Text question:
-                            <input type="radio" data-ng-model="question.Type" value="text"/ ng-change="qTypeText()"/>
-                        </p>
-                        <p>Single choice question:
-                            <input type="radio" data-ng-model="question.Type" value="single"/ ng-change="qTypeSingle()"/>
-                        </p>
-                        <p>Multiple choice question:
-                            <input type="radio" data-ng-model="question.Type" value="multiple" ng-change="qTypeMultiple()"/>
-                        </p>
-                    </div>
-                    <div class="single-choice-question" ng-if="vm.displaySingleChoiceA">
-                        <input placeholder="Icelandic text" data-ng-model="answer.TextIS"/>
-                        <input placeholder="English text !" data-ng-model="answer.TextEN"/>
-                        <input placeholder="for image TODO" data-ng-model="answer.ImageURL"/>
-                        <select data-ng-model="answer.weight">
-                            <option value=1>1</option>
-                            <option value=2>2</option>
-                            <option value=3>3</option>
-                            <option value=4>4</option>
-                            <option value=5>5</option>
-                        </select>
-                        <button class="" ng-click="addSingleChoiceAnswer()">Confirm Answer</button>
-                        <button class="" ng-click="abortAnswer()">Cancel</button>
-                    </div>
-                    <div class="multiple-choice-question" ng-if="vm.displayMultipleChoiceA">
-                        <div class="multiple-choice-question repeat" ng-repeat="answer in multipleChoiceAnswer.answers track by $index">
-                            <p>Choice:</p>
-                            <input placeholder="Icelandic text" data-ng-model="answer.TextIS"/>
-                            <input placeholder="English text" data-ng-model="answer.TextEN"/>
-                            <input placeholder="URL for image" data-ng-model="answer.ImageURL"/>
-                            <select data-ng-model="answer.Weight">
-                                <option value=1>1</option>
-                                <option value=2>2</option>
-                                <option value=3>3</option>
-                                <option value=4>4</option>
-                                <option value=5>5</option>
-                            </select>
-                            <button class="" ng-click="removeChoice($index)">Remove choice</button>
+                </div>
+                <div class="col-sm-6">
+                    <div class="row right">
+                        <div class ="add-question" ng-if="vm.displayQ">
+                            <h3>Add question</h3>
+                            <form class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="checkbox-inline">
+                                      <input type="radio" data-ng-model="qhandle.teacherOrCourseQ" value="course"> Course Question
+                                    </label>                                    
+                                    <label class="checkbox-inline">
+                                      <input type="radio" data-ng-model="qhandle.teacherOrCourseQ" value="teacher"> Teacher Question
+                                    </label>                                    
+                                </div>
+                            </form>
+                            <div class="question-text">
+                                <label>Question Text:</label>
+                                <form class="form-horizontal" role="form">
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <input class="form-control" placeholder="Icelandic" data-ng-model="question.TextIS"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <input class="form-control" placeholder="English" data-ng-model="question.TextEN"/>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="image-url">
+                                <label>Image URL:</label>
+                                <form class="form-horizontal" role="form">
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <input class="form-control" placeholder="URL for image" data-ng-model="question.ImageURL"/>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="form-group">
+                                <h4>Select question type:</h4>
+                                <label class="checkbox-inline">
+                                  <input type="radio" data-ng-model="question.Type" value="text" ng-change="qTypeText()"> Text
+                                </label>                                    
+
+                                <label class="checkbox-inline">
+                                  <input type="radio" data-ng-model="question.Type" value="single" ng-change="qTypeMultiple()"> Single choice
+                                </label>                                    
+
+                                <label class="checkbox-inline">
+                                  <input type="radio" data-ng-model="question.Type" value="multiple" ng-change="qTypeMultiple()"> Multiple choice
+                                </label>                                    
+
+                            </div>
+                            <div class="single-choice-question" ng-if="vm.displaySingleChoiceA">
+                                <input placeholder="Icelandic text" data-ng-model="answer.TextIS"/>
+                                <input placeholder="English text" data-ng-model="answer.TextEN"/>
+                                <input placeholder="for image TODO" data-ng-model="answer.ImageURL"/>
+                                <select data-ng-model="answer.weight">
+                                    <option value="1" selected="selected">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                                <button class="btn btn-default " ng-click="addSingleChoiceAnswer()">Confirm Answer</button>
+                                <button class="btn btn-default " ng-click="abortAnswer()">Cancel</button>
+                            </div>
+                            <div class="multiple-choice-question" ng-if="vm.displayMultipleChoiceA">
+                                <div class="row" ng-repeat="answer in multipleChoiceAnswer.answers track by $index">
+                                    <div class="col-xs-12">
+                                        <label>Choice:</label>
+                                        <form class="form-horizontal">                                    
+                                            <div class="form-group col-sm-12 col-xs-6">
+                                                <div class="col-sm-6 col-xs-6">
+                                                    <input class="form-control" placeholder="Icelandic text" data-ng-model="answer.TextIS"/>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-6">
+                                                    <input class="form-control" placeholder="English text" data-ng-model="answer.TextEN"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-sm-12 col-xs-6">
+                                                <div class="col-sm-6 col-xs-6">
+                                                    <input class="form-control" placeholder="URL for image" data-ng-model="answer.ImageURL"/>
+                                                </div>
+                                                <div class="col-sm-4 col-xs-4">
+                                                    <select class="form-control" data-ng-model="answer.Weight">
+                                                        <option value="1" selected="selected">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-2 col-xs-2">
+                                                    <a class="btn btn-default " ng-click="removeChoice($index)"><span class="glyphicon glyphicon-trash"></span></a>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-default " ng-click="addChoice()">Add a choice</button>
+                                    <button class="btn btn-default " ng-if="vm.canConfirmMultipleChoiceA" ng-click="addMultipleChoiceAnswer()">Confirm Answer</button>
+                                    <button class="btn btn-default " ng-click="abortAnswer()">Cancel</button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-default " ng-click="abortQuestion()">Cancel question</button>
+                                <button class="btn btn-default " ng-click="addQuestion()">Add the question</button>
+                            </div>
                         </div>
-                        <button class="" ng-click="addChoice()">Add a choice</button>
-                        <button class="" ng-if="vm.canConfirmMultipleChoiceA" ng-click="addMultipleChoiceAnswer()">Confirm Answer</button>
-                        <button class="" ng-click="abortAnswer()">Cancel</button>
                     </div>
-                    <button class="" ng-click="abortQuestion()">Cancel question</button>
-                    <button class="" ng-click="addQuestion()">Add the question</button>
                 </div>
             </div>
         </div>
-        <button class="" ng-click="abortEdit()">Abort template edit</button>
-        <button class="" ng-click="postTemplate()">Post template</button>
+            
     </div>
 </div>
 
