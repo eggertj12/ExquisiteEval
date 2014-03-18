@@ -39,10 +39,10 @@ describe('Controller: UserCtrl', function () {
     expect(scope.evalInfo.teachers.length).toBe(1);
     expect(scope.evalInfo.teachers[0].FullName).toBe('Daníel Brandur Sigurgeirsson');
     expect(scope.evalInfo.courseQuestions.length).toBe(3);
-    expect(scope.evalInfo.courseQuestions[0].question.text).toBe('Hvernig er áfangin?');
+    expect(scope.evalInfo.courseQuestions[0].question.textIS).toBe('Hvernig er áfangin?');
     expect(scope.evalInfo.teacherQuestions.length).toBe(1);
     expect(scope.evalInfo.teacherQuestions[0].questions.length).toBe(3);
-    expect(scope.evalInfo.teacherQuestions[0].questions[0].question.text).toBe('Hvernig var þessi kennari?');
+    expect(scope.evalInfo.teacherQuestions[0].questions[0].question.textIS).toBe('Hvernig var þessi kennari?');
   });
 
   it('submitEval should generate a legit answer object for the api', function() {
@@ -52,12 +52,25 @@ describe('Controller: UserCtrl', function () {
     scope.$apply();
 
     // Simulate user input
+    scope.evalInfo.courseQuestions[0].answer.Value = 'Fínn bara';
     scope.evalInfo.courseQuestions[2].answer.Value[52] = true;
     scope.evalInfo.courseQuestions[2].answer.Value[53] = true;
     scope.evalInfo.teacherQuestions[0].questions[2].answer.Value[57] = true;
     scope.evalInfo.teacherQuestions[0].questions[2].answer.Value[58] = true;
 
     scope.submitEval();
+    scope.$apply();
+
+    expect(scope.evalInfo.answers[0].TeacherSSN).toBe('');
+    expect(scope.evalInfo.answers[0].Value).toBe('Fínn bara');
+    expect(scope.evalInfo.answers[0].QuestionID).toBe(37);
+
+    expect(scope.evalInfo.answers[7].TeacherSSN).toBe('1203735289');
+    expect(scope.evalInfo.answers[7].Value).toBe('58');
+    expect(scope.evalInfo.answers[7].QuestionID).toBe(42);
+    expect(scope.submitResult).toBe('Evaluation successfully submitted! Thanks!');
+    expect(scope.showEval).toBe(false);
+    expect(scope.ID).toBe('');
   });
 
 });

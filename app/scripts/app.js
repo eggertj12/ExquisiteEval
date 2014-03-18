@@ -32,12 +32,18 @@ angular.module('exquisiteEvalApp', [
   config(function ($httpProvider) {
     $httpProvider.interceptors.push('AuthInterceptor');
   })
-  .run(['$rootScope', '$location', 'EvalState',
-    function ($rootScope, $location, EvalState) {
+  .run(['$rootScope', '$location', '$window', 'EvalState',
+    function ($rootScope, $location, $window, EvalState) {
     $rootScope.$on('$routeChangeStart', function () {
 
-      if (EvalState.Token === null) {
-        $location.path('/login');
+      if (EvalState.getToken() === null) {
+        // Check sessionStorage for token in case of page reload
+        // Seems that null will be saved as the string 'null'
+        if ($window.sessionStorage.Token && $window.sessionStorage.Token !== 'null') {
+          EvalState.setToken($window.sessionStorage.Token);
+        } else {
+          $location.path('/login');
+        }
       }
 
     });

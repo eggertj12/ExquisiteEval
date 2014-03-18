@@ -1,8 +1,56 @@
 .User {
-	color: #ccc;
+
 }
 
-.User h4 {
-	color: blue;
-	padding-left: 30px;
+.User-evaluations-eval {
+    cursor: pointer;
+}
+
+.User-eval-glyphicon {
+	width: 20px;
+	float: left;
+}
+
+.Radio {
+	float: left;
+}
+
+.User-evaluation-green {
+    color: green;
+}
+
+.User-evaluation-red {
+    color: red;
+}
+
+.Evalselected {
+	background-color: #f1f1fa;
+	border: 1px dashed #ccc;
+}
+
+.User-eval-info p {
+	padding-left: 17px;
+}
+
+.User-evaluations-eval-title {
+    cursor: pointer;
+    font-size: 1.3em;
+    margin: 0;
+}
+
+.User-evaluations-eval-id {
+    display: inline-block;
+    min-width: 7em;
+    width: 20%;
+    font-size: 0.8em;
+	margin: 0;
+}
+
+.User-evaluations a {
+	color: black;
+}
+
+.User h3 {
+	font-weight: bold;
+	padding-left: 12px;
 }

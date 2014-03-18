@@ -59,15 +59,51 @@ describe('Controller: AdminCtrl', function () {
     expect(scope.vm.evaluation.id).toBe('smuuuuu');
   });
 
-  it('selectCourse should update viewModel with input', function() {
+  it('selectCourse should reset vm.course if no input', function() {
     // Arrange
-    var dummy = {foo: 'bar'};
 
     // Act
-    scope.selectCourse(dummy);
+    scope.selectCourse();
 
     // Assert
+    expect(scope.vm.course).toEqual({});
+  });
+
+  it('selectCourse should update viewModel with input and load teachers', function() {
+    // Arrange
+    var dummyCourse = {
+      foo: 'bar',
+      CourseID: 'foo',
+      Semester: 'bar'
+    };
+
+    // Act
+    scope.selectCourse(dummyCourse);
+    scope.$apply();
+    
+    // Assert
     expect(scope.vm.course.foo).toBe('bar');
+    expect(scope.vm.teachers.foo.bar.length).toBe(1);
+  });
+
+  it('selectCourse should not load teachers if already defined', function() {
+    // Arrange
+    var dummyCourse = {
+      foo: 'bar',
+      CourseID: 'foo',
+      Semester: 'bar'
+    };
+
+    scope.vm.teachers.foo = {
+      bar: 'smuuuuu'
+    };
+
+    // Act
+    scope.selectCourse(dummyCourse);
+    scope.$apply();
+    
+    // Assert
+    expect(scope.vm.teachers.foo.bar).toBe('smuuuuu');
   });
 
   it('openTeacher should set undfined to true', function() {

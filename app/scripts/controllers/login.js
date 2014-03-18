@@ -10,12 +10,12 @@ angular.module('exquisiteEvalApp')
       pass: ''
     };
 
-    $scope.Token = EvalState.Token;
+    $scope.Token = EvalState.getToken();
 
     $scope.login = function() {
       $http.post(EvalSettings.backendURL + 'login', $scope.user).
       success(function(data) {
-        EvalState.Token = data.Token;
+        EvalState.setToken(data.Token);
         if (data.User.Role === 'admin') {
           $location.url('/admin');
         } else {
@@ -28,7 +28,7 @@ angular.module('exquisiteEvalApp')
     };
 
     $scope.logout = function() {
-      EvalState.Token = null;
+      EvalState.setToken(null);
       $scope.Token = null;
     };
 

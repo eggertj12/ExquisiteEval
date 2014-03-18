@@ -76,9 +76,15 @@ function MockBackend($q) {
       return deferred.promise;
     },
 
-    getCourseEvaluation: function(course, semester, id) {
+    addCourseEvaluation: function(course, semester, id, answers) {
       var deferred = $q.defer();
-      deferred.resolve({
+      deferred.resolve('ok');
+      return deferred.promise;
+    },
+
+    getCourseEvaluation: function(course, semester, id) {
+      var deferred = $q.defer(),
+        result = {
         ID: 8,
         TitleIS: 'Kennslumat',
         IntroTextIS: 'endilega takið þetta kennslumat',
@@ -167,14 +173,8 @@ function MockBackend($q) {
             Weight: 3
           }]
         }]
-      });
-
-      return deferred.promise;
-    },
-
-    addCourseEvaluation: function() {
-      var deferred = $q.defer();
-      deferred.resolve('ok');
+      };
+      deferred.resolve(result);
 
       return deferred.promise;
     }

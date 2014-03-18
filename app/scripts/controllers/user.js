@@ -7,6 +7,7 @@ angular.module('exquisiteEvalApp')
       $scope.evaluations = [];
       $scope.showEval = false;
       $scope.submitResult = '';
+      $scope.ID = '';
       EvalState.PageTitle = 'Your open evaluations';
       
       // Contains various info about the eval selected
@@ -15,7 +16,9 @@ angular.module('exquisiteEvalApp')
         semester: '',
         ID: '',
         titleIS: '',
+        titleEN: '',
         introTextIS: '',
+        introTextEN: '',
         courseQuestions: [],
         teacherQuestions: [],
         answers:[],
@@ -29,6 +32,7 @@ angular.module('exquisiteEvalApp')
 
       // User clicked on an evaluation
       $scope.getEval = function(course, semester, id) {
+        $scope.ID = id;
         $scope.submitResult = '';
         // Get the list of teachers for this course
         EvalBackend.getCourseTeachers(course, semester).then(function(data) {
@@ -43,8 +47,8 @@ angular.module('exquisiteEvalApp')
           $scope.evalInfo.teacherQuestions = [];
           $scope.evalInfo.course = course;
           $scope.evalInfo.semester = semester;
-          $scope.evalInfo.introTextIS = data.IntoTextIS;
-          $scope.evalInfo.titleIS = data.TitleIS;
+          $scope.evalInfo.introTextEN = data.IntroTextEN;
+          $scope.evalInfo.titleEN = data.TitleEN;
           $scope.evalInfo.ID = id;
 
           angular.forEach(data.CourseQuestions, function(quest) {
@@ -53,7 +57,8 @@ angular.module('exquisiteEvalApp')
             var thisQuestion = {
               question: {
                 ID: quest.ID,
-                text: quest.TextIS,
+                textIS: quest.TextIS,
+                textEN: quest.TextEN,
                 type: quest.Type,
                 img: quest.ImageURL
               },
@@ -72,7 +77,7 @@ angular.module('exquisiteEvalApp')
               thisQuestion.question.choices = [];
               // So for each available answer choice we add it to our object
               angular.forEach(quest.Answers, function(answ) {
-                  var choice = { ID: answ.ID, text: answ.TextIS, img: answ.ImageURL, weight: answ.Weight };
+                  var choice = { ID: answ.ID, textIS: answ.TextIS, textEN: answ.TextEN, img: answ.ImageURL, weight: answ.Weight };
                   thisQuestion.question.choices.push(choice);
 
                   /* If the question is a multiple choice question we add the choice to the object that holds ID of each available choice as well as whether it's checked(true/false)
@@ -107,7 +112,8 @@ angular.module('exquisiteEvalApp')
               var thisQuestion = {
                 question: {
                   ID: quest.ID,
-                  text: quest.TextIS,
+                  textIS: quest.TextIS,
+                  textEN: quest.TextEN,
                   type: quest.Type,
                   img: quest.ImageURL
                 },
@@ -126,7 +132,7 @@ angular.module('exquisiteEvalApp')
                 thisQuestion.question.choices = [];
                 // So for each available answer choice we add it to our object
                 angular.forEach(quest.Answers, function(answ) {
-                    var choice = { ID: answ.ID, text: answ.TextIS, img: answ.ImageURL, weight: answ.Weight };
+                    var choice = { ID: answ.ID, textIS: answ.TextIS, textEN: answ.TextEN, img: answ.ImageURL, weight: answ.Weight };
                     thisQuestion.question.choices.push(choice);
 
                      /* If the question is a multiple choice question we add the choice to the object that holds ID of each available choice as well as whether it's checked(true/false)
@@ -159,25 +165,22 @@ angular.module('exquisiteEvalApp')
           angular.forEach($scope.evalInfo.courseQuestions, function(quest) {
             // Get the answer object for this question
             var answ = quest.answer;
-
             // Since our answers for the multiple choice answers aren't on the format the API expects, we convert them to the right format
             if(quest.question.type === 'multiple') {
-              var checkboxes = '';
               // For every choice, we concatenate to our string, as long it's been checked 
               angular.forEach(answ.Value, function(check, id) {
                 // Is the checkbox checked
                 if(check) {
                   // Add a comma after every concatenation, unless it's the start of the string
-                  if(checkboxes.length > 0) {
-                    checkboxes += ', ';
-                  }
-                  checkboxes += id;
+                  var thisAnsw = angular.copy(answ);
+                  thisAnsw.Value = id;
+                  $scope.evalInfo.answers.push(thisAnsw);
                 }
               });
-              // Put our checkbox string to our answer object
-              answ.Value = checkboxes;
             }
-            $scope.evalInfo.answers.push(answ);
+            else {
+              $scope.evalInfo.answers.push(answ);
+            }
           });
           // For every teacher
           angular.forEach($scope.evalInfo.teacherQuestions, function(teacher) {
@@ -187,28 +190,26 @@ angular.module('exquisiteEvalApp')
               var answ = quest.answer;
               // Since our answers for the multiple choice answers aren't on the format the API expects, we convert them to the right format
               if(quest.question.type === 'multiple') {
-                var checkboxes = '';
                 // For every choice, we concatenate to our string, as long it's been checked 
                 angular.forEach(answ.Value, function(check, id) {
                   // Is the checkbox checked
                   if(check) {
                     // Add a comma after every concatenation, unless it's the start of the string
-                    if(checkboxes.length > 0) {
-                      checkboxes += ', ';
-                    }
-                    checkboxes += id;
+                    var thisAnsw = angular.copy(answ);
+                    thisAnsw.Value = id;
+                    $scope.evalInfo.answers.push(thisAnsw);
                   }
                 });
-                // Put our checkbox string to our answer object
-                answ.Value = checkboxes;
               }
-              $scope.evalInfo.answers.push(answ);
+              else {
+                $scope.evalInfo.answers.push(answ);
+              }
             });
           });
-          console.log($scope.evalInfo.answers);
-          EvalBackend.addCourseEvaluation($scope.evalInfo.course, $scope.evalInfo.semester, $scope.evalInfo.ID, $scope.evalInfo.answers).then(function() {
+          EvalBackend.addCourseEvaluation($scope.evalInfo.course, $scope.evalInfo.semester, $scope.evalInfo.ID, $scope.evalInfo.answers).then(function(status) {
             $scope.submitResult = 'Evaluation successfully submitted! Thanks!';
             $scope.showEval = false;
+            $scope.ID = '';
             // Refresh the list of evals
             $scope.evaluations = [];
             EvalBackend.getMyEvaluations().then(function(evals) {

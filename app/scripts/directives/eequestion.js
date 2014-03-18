@@ -13,7 +13,7 @@ angular.module('exquisiteEvalApp')
     // Helper functions
     function textQuestion(element) {
       // Strip unused content from template
-      element.find('.Question-graph-canvas').remove();
+      element.find('.Question-graph').remove();
     }
 
     function graphQuestion(element, question) {
@@ -42,7 +42,7 @@ angular.module('exquisiteEvalApp')
       },
       link: function postLink(scope, element) {
 
-        scope.toggleClosed =function() {
+        scope.toggleClosed = function() {
           scope.question.closed = !scope.question.closed;
         };
 
