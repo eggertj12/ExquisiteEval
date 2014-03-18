@@ -98,10 +98,6 @@ angular.module('exquisiteEvalApp')
       });
     };
 
-    $scope.iLoveJSHINT = function() {
-      console.log(EvalState);
-    };
-
     // editing functions
 
     $scope.addingQuestion = function() {
