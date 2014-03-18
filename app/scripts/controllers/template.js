@@ -172,13 +172,13 @@ angular.module('exquisiteEvalApp')
     };
 
     $scope.addMultipleChoiceAnswer = function() {
-      $scope.question.Answer = angular.copy($scope.multipleChoiceAnswer.answers);
+      $scope.question.Answers = angular.copy($scope.multipleChoiceAnswer.answers);
 
       $scope.vm.displayMultipleChoiceA = false;
     };
 
     $scope.addSingleChoiceAnswer = function() {
-      $scope.question.Answer.push(angular.copy($scope.answer));
+      $scope.question.Answers.push(angular.copy($scope.answer));
 
       $scope.vm.displaySingleChoiceA = false;
     };
