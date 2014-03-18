@@ -39,7 +39,7 @@ Which concatenates and minifies all files to `dist` directory which can then be 
 
 Development build of package can be built and continuously run via `grunt serve` task which then watches for changes and livereloads browser window.
 
-Continuous testing can also be done with `karma start` command which will monitor changes to files and rerun tests when necessary
+Continuous testing can also be done with `karma start` command which will monitor changes to files and rerun tests when necessary. Code coverage report should be available under `coverage` folder in project root.
 
 ## Usage
 

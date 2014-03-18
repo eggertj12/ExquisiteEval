@@ -111,7 +111,7 @@ describe('Directive: eeQuestion', function () {
       var scope,
         question = {
           Type: 'text',
-          closed: true
+          closed: false
         };
 
       element = createDirective(question);
@@ -121,7 +121,8 @@ describe('Directive: eeQuestion', function () {
       scope.toggleClosed();
 
       // Assert
-      expect(question.closed).toBe(false);
+      // eequestion will always initialize closed to false so should be true after toggleClosed
+      expect(question.closed).toBe(true);
     });
 
   });

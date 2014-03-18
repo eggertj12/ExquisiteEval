@@ -70,7 +70,8 @@
                         <div class="col-xs-12">
                             <h4 class="AdminEvalResult-heading AdminEvalResult-heading--clickable"
                                 ng-click="openTeacher(vm.course)"
-                                ng-class="{'Util-expandable--open': !vm.course.open, 'Util-expandable--closed': vm.course.open}">
+                                ng-class="{'Util-expandable--open': !vm.course.open, 'Util-expandable--closed': vm.course.open}"
+                                ng-show="vm.course">
                                 Course questions</h4>
                         </div>
                     </div>
@@ -87,7 +88,7 @@
             <!-- Loop all teachers -->
             <div class="row">
                 <div class="col-xs-12">
-                    <h4 class="AdminEvalResult-heading">Teacher questions</h4>
+                    <h4 class="AdminEvalResult-heading" ng-show="vm.course">Teacher questions</h4>
                     <section class="AdminEvalResult-teacher clearfix"ng-repeat="teacher in vm.teachers[vm.course.CourseID][vm.course.Semester]">
 
                         <!-- Teacher info -->
