@@ -205,7 +205,7 @@ angular.module('exquisiteEvalApp')
         if($scope.qhandle.teacherOrCourseQ === 'course') {
           $scope.template.CourseQuestions.push(newQuestion);
         }
-        else if($scope.qhandle.teacherOrCourseQ === 'teacher') {
+        if($scope.qhandle.teacherOrCourseQ === 'teacher') {
           $scope.template.TeacherQuestions.push(newQuestion);
         }
         $scope.vm.displayQ = false;
