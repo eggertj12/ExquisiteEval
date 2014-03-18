@@ -6,7 +6,7 @@ angular.module('exquisiteEvalApp')
     $scope.state = EvalState;
 
     $scope.logout = function() {
-      EvalState.Token = null;
+      EvalState.setToken(null);
       $location.url('/login');
     };
 

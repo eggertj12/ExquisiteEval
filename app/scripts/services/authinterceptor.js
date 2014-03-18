@@ -7,8 +7,8 @@ angular.module('exquisiteEvalApp')
     return {
       request: function (config) {
         config.headers = config.headers || {};
-        if (EvalState.Token !== null) {
-          config.headers.Authorization = 'Basic ' + EvalState.Token;
+        if (EvalState.getToken() !== null) {
+          config.headers.Authorization = 'Basic ' + EvalState.getToken();
         }
         return config;
       }
