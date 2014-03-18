@@ -96,7 +96,7 @@
 									<span ng-repeat="question in teacherQuestion.question.choices">
 										<div class="checkbox">
 											<label>
-												<input type="checkbox" value="{{question.ID}}" name="{{courseQuestion.ID}}" ng-model="teacherQuestion.answer.Value[question.ID]">>
+												<input type="checkbox" value="{{question.ID}}" name="{{courseQuestion.ID}}" ng-model="teacherQuestion.answer.Value[question.ID]">
 												{{question.textEN}}
 											</label>
 											<span ng-if="question.weight == 5" class="glyphicon glyphicon-thumbs-up User-evaluation-green"></span>
